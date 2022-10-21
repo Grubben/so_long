@@ -24,7 +24,7 @@ $(NAME)	: $(MINILIBX) $(OBJS)
 $(MINILIBX)	:
 				$(MAKE) -C src/minilibx-linux
 				# $(MAKE) -C src/minilibx-linux --silent
-				cp src/minilibx-linux/libmlx_Darwin.a $(MINILIBX)
+				cp $(wildcard src/minilibx-linux/libmlx_*.a) $(MINILIBX)
 
 all			: $(NAME)
 

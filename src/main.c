@@ -15,20 +15,8 @@
 
 void	intbin_append(int *color, unsigned char fam)
 {
-	int	shifts;
-
-	if (fam == 0)
-	{
-		*color = *color << 8;
-		return;
-	}
-	shifts = 7;
-	while (shifts > -1)
-	{
-		*color = *color << 1;
-		*color = *color | ((fam >> shifts) & 1);
-		shifts--;
-	}
+	*color = *color << 8;
+	*color = *color | fam;
 }
 
 int	rgbToColor(unsigned char r, unsigned char g, unsigned char b)
@@ -52,14 +40,14 @@ int	main(void)
 	connid = mlx_init();
 
 	winid = mlx_new_window(connid, 500, 500, "So Long");
+	mlx_string_put(connid, winid, 50, 150, rgbToColor(255, 0, 0), "YAY");
+	mlx_string_put(connid, winid, 50, 100, rgbToColor(0, 255, 0), "YAY");
 	mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 100, rgbToColor(0, 0, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 150, rgbToColor(0, 0, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 200, rgbToColor(0, 0, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 250, rgbToColor(0, 0, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 300, rgbToColor(0, 0, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 350, rgbToColor(0, 0, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 400, rgbToColor(0, 0, 255), "YAY");
+	mlx_string_put(connid, winid, 50, 200, rgbToColor(255, 255, 255), "YAY");
+	mlx_string_put(connid, winid, 50, 300, rgbToColor(255, 255, 0), "YAY");
+	mlx_string_put(connid, winid, 50, 250, rgbToColor(255, 0, 255), "YAY");
+	mlx_string_put(connid, winid, 50, 350, rgbToColor(0, 255, 255), "YAY");
+	// mlx_string_put(connid, winid, 50, 400, rgbToColor(0, 0, 255), "YAY");
 
 	
 	mlx_loop(connid);

@@ -11,7 +11,15 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+typedef struct s_vars
+{
+	void	*mlx_ptr;
+	void	*win_ptr;	
+}				t_vars;
+
 #include <stdio.h>
+#include <stdlib.h>
+
 
 void	intbin_append(int *color, unsigned char fam)
 {
@@ -32,25 +40,46 @@ int	rgbToColor(unsigned char r, unsigned char g, unsigned char b)
 
 }
 
+int	keyboardPrinter(int keycode)
+{
+	(void)keycode;
+	if (keycode == 32)
+		printf("M\n");
+	return (1);
+}
+
+int	windestroy(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
+	exit(0);
+}
+
+// int	ft_keyboard()
+
 int	main(void)
 {
 	// printf("%i\n", rgbToColor(127, 0, 0, 255));
-	void	*connid, *winid;
+	// void	*connid, *winid;
+	// int	mx, my;	// mouse-x and y
+	t_vars	vars;
 
-	connid = mlx_init();
+	vars.mlx_ptr = mlx_init();
+	vars.win_ptr = mlx_new_window(vars.mlx_ptr, 500, 500, "So Long");
 
-	winid = mlx_new_window(connid, 500, 500, "So Long");
-	mlx_string_put(connid, winid, 50, 150, rgbToColor(255, 0, 0), "YAY");
-	mlx_string_put(connid, winid, 50, 100, rgbToColor(0, 255, 0), "YAY");
-	mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 200, rgbToColor(255, 255, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 300, rgbToColor(255, 255, 0), "YAY");
-	mlx_string_put(connid, winid, 50, 250, rgbToColor(255, 0, 255), "YAY");
-	mlx_string_put(connid, winid, 50, 350, rgbToColor(0, 255, 255), "YAY");
-	// mlx_string_put(connid, winid, 50, 400, rgbToColor(0, 0, 255), "YAY");
+	// mlx_string_put(connid, winid, 50, 150, rgbToColor(255, 0, 0), "YAY");
+	// mlx_string_put(connid, winid, 50, 100, rgbToColor(0, 255, 0), "YAY");
+	// mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
+	// mlx_pixel_put(connid, winid, 100, 100, rgbToColor(255, 255, 255));
 
+	// Figuring out how hooks work.
+	// These 2 are exactly the same
+	mlx_hook(vars.win_ptr, 2, 1L<<0, keyboardPrinter, NULL);
+	// mlx_key_hook(vars.win_ptr, keyboardPrinter, NULL);
+
+	mlx_hook(vars.win_ptr, 17, 0L, windestroy, &vars); // DestroyNotify of the window
 	
-	mlx_loop(connid);
+
+	mlx_loop(vars.mlx_ptr);
 
 	
 	return (0);

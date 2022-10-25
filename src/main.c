@@ -10,16 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "so_long.h"
-typedef struct s_vars
+typedef struct s_info
 {
-	void	*mlx_ptr;
-	void	*win_ptr;	
-}				t_vars;
+	void	*mlx;
+	void	*win;
+
+	unsigned int	SIZE_X;
+	unsigned int	SIZE_Y;
+
+	void			*img;
+
+	unsigned int	ppos_x;
+	unsigned int	ppos_y;
+
+	size_t			n_moves;
+}				t_info;
 
 #include <stdio.h>
-#include <stdlib.h>
-
 
 void	intbin_append(int *color, unsigned char fam)
 {
@@ -40,46 +49,83 @@ int	rgbToColor(unsigned char r, unsigned char g, unsigned char b)
 
 }
 
-int	keyboardPrinter(int keycode)
+int	keyboardPrinter(int keycode, t_info *main)
 {
-	(void)keycode;
-	if (keycode == 32)
-		printf("M\n");
+	if (keycode == 'w')
+		printf("w\n");
+	else if (keycode == 'a')
+		printf("a\n");
+	else if (keycode == 's')
+	{
+		main->ppos_y += 20;
+		printf("s\n");
+	}
+	else if (keycode == 'd')
+		printf("d\n");
+	else
+		printf("k%i\n", keycode);
 	return (1);
 }
 
-int	windestroy(t_vars *vars)
+int	windestroy(t_info *main)
 {
-	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
+	mlx_destroy_window(main->mlx, main->win);
 	exit(0);
 }
 
-// int	ft_keyboard()
+int	theloop(t_info *main)
+{
+	static int		frame = 0;
+
+	if (frame == 60000)
+	{
+		mlx_clear_window(main->mlx, main->win);
+		mlx_put_image_to_window(main->mlx, main->win, main->img, main->SIZE_X, main->SIZE_Y);
+		mlx_string_put(main->mlx, main->win, main->ppos_x, main->ppos_y, rgbToColor(0, 255, 255), "@");
+		mlx_destroy_image(main->mlx, main->img);
+		main->img = mlx_new_image(main->mlx, main->SIZE_X, main->SIZE_Y);
+		frame = 0;
+		printf("%d\n", frame);
+	}
+	frame++;
+	return (frame);
+}
 
 int	main(void)
 {
 	// printf("%i\n", rgbToColor(127, 0, 0, 255));
 	// void	*connid, *winid;
 	// int	mx, my;	// mouse-x and y
-	t_vars	vars;
+	t_info	main;
 
-	vars.mlx_ptr = mlx_init();
-	vars.win_ptr = mlx_new_window(vars.mlx_ptr, 500, 500, "So Long");
+	main.mlx = mlx_init();
+	main.SIZE_X = 500;
+	main.SIZE_Y = 500;
+	main.win = mlx_new_window(main.mlx, main.SIZE_X, main.SIZE_Y, "So Long");
+	main.n_moves = 0;
+
+	main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
+
+	main.ppos_x = 10;
+	main.ppos_y = 10;
+
+	mlx_string_put(main.mlx, main.win, main.ppos_x, main.ppos_y, rgbToColor(0, 255, 255), "@");
+
 
 	// mlx_string_put(connid, winid, 50, 150, rgbToColor(255, 0, 0), "YAY");
 	// mlx_string_put(connid, winid, 50, 100, rgbToColor(0, 255, 0), "YAY");
 	// mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
 	// mlx_pixel_put(connid, winid, 100, 100, rgbToColor(255, 255, 255));
 
+	mlx_loop_hook(main.mlx, theloop, &main);
+
 	// Figuring out how hooks work.
 	// These 2 are exactly the same
-	mlx_hook(vars.win_ptr, 2, 1L<<0, keyboardPrinter, NULL);
-	// mlx_key_hook(vars.win_ptr, keyboardPrinter, NULL);
+	// mlx_hook(main.win, 2, 1L<<0, keyboardPrinter, NULL);
+	mlx_key_hook(main.win, keyboardPrinter, &main);
 
-	mlx_hook(vars.win_ptr, 17, 0L, windestroy, &vars); // DestroyNotify of the window
-	
-
-	mlx_loop(vars.mlx_ptr);
+	mlx_hook(main.win, 17, 0L, windestroy, &main); // DestroyNotify of the window
+	mlx_loop(main.mlx);
 
 	
 	return (0);

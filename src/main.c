@@ -108,6 +108,7 @@ int	main(void)
 	// void	*connid, *winid;
 	// int	mx, my;	// mouse-x and y
 	t_info	main;
+	int		width, height;
 
 	main.mlx = mlx_init();
 	main.SIZE_X = 500;
@@ -115,12 +116,15 @@ int	main(void)
 	main.win = mlx_new_window(main.mlx, main.SIZE_X, main.SIZE_Y, "So Long");
 	main.n_moves = 0;
 
-	main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
+	// main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
+	main.img = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1.xpm", &width, &height);
+	printf("%d__%d\n", width, height);
+	mlx_put_image_to_window(main.mlx, main.win, main.img, 16, 16);
 
 	main.ppos_x = 10;
 	main.ppos_y = 10;
 
-	mlx_string_put(main.mlx, main.win, main.ppos_x, main.ppos_y, rgbToColor(0, 255, 255), "@");
+	// mlx_string_put(main.mlx, main.win, main.ppos_x, main.ppos_y, rgbToColor(0, 255, 255), "@");
 
 
 	// mlx_string_put(connid, winid, 50, 150, rgbToColor(255, 0, 0), "YAY");
@@ -128,7 +132,9 @@ int	main(void)
 	// mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
 	// mlx_pixel_put(connid, winid, 100, 100, rgbToColor(255, 255, 255));
 
-	mlx_loop_hook(main.mlx, theloop, &main);
+
+
+	// mlx_loop_hook(main.mlx, theloop, &main);
 
 	// Figuring out how hooks work.
 	// These 2 are exactly the same

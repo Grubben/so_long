@@ -52,18 +52,29 @@ int	rgbToColor(unsigned char r, unsigned char g, unsigned char b)
 int	keyboardPrinter(int keycode, t_info *main)
 {
 	if (keycode == 'w')
+	{
+		main->ppos_y -= 20;
 		printf("w\n");
+	}
 	else if (keycode == 'a')
+	{
+		main->ppos_x -= 20;
 		printf("a\n");
+	}
 	else if (keycode == 's')
 	{
 		main->ppos_y += 20;
 		printf("s\n");
 	}
 	else if (keycode == 'd')
+	{
+		main->ppos_x += 20;
 		printf("d\n");
+	}
 	else
+	{
 		printf("k%i\n", keycode);
+	}
 	return (1);
 }
 

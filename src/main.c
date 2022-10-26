@@ -29,6 +29,10 @@ typedef struct s_info
 	int				pimg_width;
 	int				pimg_height;
 
+	void			*wallimg;
+	int				wallimg_width;
+	int				wallimg_height;
+
 	size_t			n_moves;
 }				t_info;
 
@@ -53,6 +57,12 @@ int	rgbToColor(unsigned char r, unsigned char g, unsigned char b)
 
 }
 
+int	windestroy(t_info *main)
+{
+	mlx_destroy_window(main->mlx, main->win);
+	exit(0);
+}
+
 int	keyboardPrinter(int keycode, t_info *main)
 {
 	if (keycode == 'w')
@@ -75,6 +85,10 @@ int	keyboardPrinter(int keycode, t_info *main)
 		main->ppos_x += 20;
 		printf("d\n");
 	}
+	else if (keycode == 65307)
+	{
+		windestroy(main);
+	}
 	else
 	{
 		printf("k%i\n", keycode);
@@ -82,19 +96,15 @@ int	keyboardPrinter(int keycode, t_info *main)
 	return (1);
 }
 
-int	windestroy(t_info *main)
-{
-	mlx_destroy_window(main->mlx, main->win);
-	exit(0);
-}
 
 int	theloop(t_info *main)
 {
 	static int		frame = 0;
 
-	if (frame == 6000)
+	if (frame == 600)
 	{
-		// mlx_clear_window(main->mlx, main->win);
+		mlx_clear_window(main->mlx, main->win);
+		mlx_put_image_to_window(main->mlx, main->win, main->wallimg, 0, 0);
 		mlx_put_image_to_window(main->mlx, main->win, main->pimg, main->ppos_x, main->ppos_y);
 		// mlx_string_put(main->mlx, main->win, main->ppos_x, main->ppos_y, rgbToColor(0, 255, 255), "@");
 		// mlx_destroy_image(main->mlx, main->img);
@@ -126,7 +136,10 @@ int	main(void)
 	main.ppos_y = 10;
 
 	main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
-	main.pimg = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1.xpm", &(main.pimg_width), &(main.pimg_height));
+	main.pimg = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1.xpm", &main.pimg_width, &main.pimg_height);
+
+	main.wallimg = mlx_xpm_file_to_image(main.mlx, "world_sprites/wall.xpm", &main.wallimg_height, &main.wallimg_height);
+
 	// printf("%d__%d\n", width, height);
 
 

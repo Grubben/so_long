@@ -25,6 +25,10 @@ typedef struct s_info
 	unsigned int	ppos_x;
 	unsigned int	ppos_y;
 
+	void			*pimg;
+	int				pimg_width;
+	int				pimg_height;
+
 	size_t			n_moves;
 }				t_info;
 
@@ -88,13 +92,16 @@ int	theloop(t_info *main)
 {
 	static int		frame = 0;
 
-	if (frame == 60000)
+	if (frame == 6000)
 	{
-		mlx_clear_window(main->mlx, main->win);
-		mlx_put_image_to_window(main->mlx, main->win, main->img, main->SIZE_X, main->SIZE_Y);
-		mlx_string_put(main->mlx, main->win, main->ppos_x, main->ppos_y, rgbToColor(0, 255, 255), "@");
-		mlx_destroy_image(main->mlx, main->img);
-		main->img = mlx_new_image(main->mlx, main->SIZE_X, main->SIZE_Y);
+		// mlx_clear_window(main->mlx, main->win);
+		mlx_put_image_to_window(main->mlx, main->win, main->pimg, main->ppos_x, main->ppos_y);
+		// mlx_string_put(main->mlx, main->win, main->ppos_x, main->ppos_y, rgbToColor(0, 255, 255), "@");
+		// mlx_destroy_image(main->mlx, main->img);
+		// main->img = mlx_new_image(main->mlx, main->SIZE_X, main->SIZE_Y);
+		// main->pimg = mlx_xpm_file_to_image(main->mlx, "player_sprites/hero1.xpm", &(main->pimg_width), &(main->pimg_height));
+		// printf("%d__%d\n", width, height);
+
 		frame = 0;
 		printf("%d\n", frame);
 	}
@@ -108,7 +115,6 @@ int	main(void)
 	// void	*connid, *winid;
 	// int	mx, my;	// mouse-x and y
 	t_info	main;
-	int		width, height;
 
 	main.mlx = mlx_init();
 	main.SIZE_X = 500;
@@ -116,13 +122,15 @@ int	main(void)
 	main.win = mlx_new_window(main.mlx, main.SIZE_X, main.SIZE_Y, "So Long");
 	main.n_moves = 0;
 
-	// main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
-	main.img = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1.xpm", &width, &height);
-	printf("%d__%d\n", width, height);
-	mlx_put_image_to_window(main.mlx, main.win, main.img, 16, 16);
-
 	main.ppos_x = 10;
 	main.ppos_y = 10;
+
+	main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
+	main.pimg = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1.xpm", &(main.pimg_width), &(main.pimg_height));
+	// printf("%d__%d\n", width, height);
+
+
+	// mlx_put_image_to_window(main.mlx, main.win, main.img, main.ppos_x, main.ppos_y);
 
 	// mlx_string_put(main.mlx, main.win, main.ppos_x, main.ppos_y, rgbToColor(0, 255, 255), "@");
 
@@ -132,14 +140,15 @@ int	main(void)
 	// mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
 	// mlx_pixel_put(connid, winid, 100, 100, rgbToColor(255, 255, 255));
 
+	mlx_pixel_put(main.mlx, main.win, 250, 250, rgbToColor(0, 255, 255));
 
+	mlx_loop_hook(main.mlx, theloop, &main);
 
-	// mlx_loop_hook(main.mlx, theloop, &main);
 
 	// Figuring out how hooks work.
-	// These 2 are exactly the same
-	// mlx_hook(main.win, 2, 1L<<0, keyboardPrinter, NULL);
-	mlx_key_hook(main.win, keyboardPrinter, &main);
+	// These 2 are (not) exactly the same
+	mlx_hook(main.win, 02, 1L<<0, keyboardPrinter, &main); // on key press
+	// mlx_key_hook(main.win, keyboardPrinter, &main); // on key release
 
 	mlx_hook(main.win, 17, 0L, windestroy, &main); // DestroyNotify of the window
 	mlx_loop(main.mlx);

@@ -17,7 +17,7 @@ MINILIBX		= src/libmlx_Linux.a
 LIBFT			= src/libft.a
 
 $(NAME)	: $(MINILIBX) $(LIBFT) $(OBJS)
-				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MINILIBX) -lXext -lX11
+				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MINILIBX) $(LIBFT) -lXext -lX11
 
 %.o			: %.c
 				$(CC) $(CFLAGS) -c -o $@ $<

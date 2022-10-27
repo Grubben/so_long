@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/10/17 18:15:59 by amc              ###   ########.fr       */
+/*   Updated: 2022/10/27 12:41:26 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,13 @@ int	theloop(t_info *main)
 	return (frame);
 }
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
 	// printf("%i\n", rgbToColor(127, 0, 0, 255));
 	// void	*connid, *winid;
 	// int	mx, my;	// mouse-x and y
 	t_info	main;
+	char	*matrixmap;
 
 	main.mlx = mlx_init();
 	main.SIZE_X = 500;
@@ -152,6 +153,11 @@ int	main(void)
 	// mlx_string_put(connid, winid, 50, 100, rgbToColor(0, 255, 0), "YAY");
 	// mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
 	// mlx_pixel_put(connid, winid, 100, 100, rgbToColor(255, 255, 255));
+
+	if (argc > 1)
+		matrixmap = mapToMatrix(argv[1]);
+
+
 
 	mlx_pixel_put(main.mlx, main.win, 250, 250, rgbToColor(0, 255, 255));
 

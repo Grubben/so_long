@@ -14,8 +14,9 @@ SRCS		= $(wildcard src/*.c)
 OBJS		= $(SRCS:.c=.o)
 
 MINILIBX		= src/libmlx_Linux.a
+LIBFT			= src/libft.a
 
-$(NAME)	: $(MINILIBX) $(OBJS)
+$(NAME)	: $(MINILIBX) $(LIBFT) $(OBJS)
 				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MINILIBX) -lXext -lX11
 
 %.o			: %.c
@@ -26,6 +27,10 @@ $(MINILIBX)	:
 				# $(MAKE) -C src/minilibx-linux --silent
 				cp src/minilibx-linux/libmlx_Linux.a $(MINILIBX)
 
+$(LIBFT)	:
+				$(MAKE) -C src/libft
+				cp src/libft/libft.a $(LIBFT)
+
 all			: $(NAME)
 
 clean		:
@@ -35,6 +40,7 @@ fclean		: clean
 				$(RM) $(NAME)
 				$(RM) $(MINILIBX)
 				# $(MAKE) -C src/minilibx-linux fclean
+				$(RM) $(LIBFT)
 
 re			: fclean $(NAME)
 

@@ -10,17 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "so_long.h"
 
-char    *mapToMatrix(char *filename)
+char    **mapToMatrix(char *filename)
 {
     int     fd;
-    char    *firstline;
-    int     linelen;
-    
+    char    *line;
+    t_list  *list;
+    t_list  *tmp;
+    char    **matrix;
+
     // first gonna hv to check if map is okay
     fd = open(filename, O_RDONLY);
-    firstline = get_next_line(fd);
-    linelen = ft_strlen(firstline);
-    return (firstline);
+    list = NULL;
+    line = get_next_line(fd);
+    while (line)
+    {
+        tmp = ft_lstnew(line);
+        if (!tmp)
+            exit(0);
+        ft_lstadd_back(&list, tmp);
+        line = get_next_line(fd);
+    }
+    matrix = ft_lsttoarr(list);
+    ft_lstclear(&list, ft_nothing);
+    return (matrix);
 }

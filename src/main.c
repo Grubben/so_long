@@ -125,7 +125,7 @@ int	main(int argc, char *argv[])
 	// void	*connid, *winid;
 	// int	mx, my;	// mouse-x and y
 	t_info	main;
-	char	*matrixmap;
+	char	**matrixmap;
 
 	main.mlx = mlx_init();
 	main.SIZE_X = 500;
@@ -156,7 +156,7 @@ int	main(int argc, char *argv[])
 
 	if (argc > 1)
 		matrixmap = mapToMatrix(argv[1]);
-
+	ft_printf("%s\n", matrixmap[0]);
 
 
 	mlx_pixel_put(main.mlx, main.win, 250, 250, rgbToColor(0, 255, 255));

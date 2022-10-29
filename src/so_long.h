@@ -14,4 +14,4 @@
 #include "libft/libft.h"
 #include <fcntl.h>
 
-char    *mapToMatrix(char *filename);
+char    **mapToMatrix(char *filename);

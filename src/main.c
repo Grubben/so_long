@@ -6,35 +6,12 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 14:58:18 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:17:48 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "so_long.h"
-typedef struct s_info
-{
-	void	*mlx;
-	void	*win;
-
-	unsigned int	SIZE_X;
-	unsigned int	SIZE_Y;
-
-	void			*img;
-
-	unsigned int	ppos_x;
-	unsigned int	ppos_y;
-
-	void			*pimg;
-	int				pimg_width;
-	int				pimg_height;
-
-	void			*wallimg;
-	int				wallimg_width;
-	int				wallimg_height;
-
-	size_t			n_moves;
-}				t_info;
 
 #include <stdio.h>
 
@@ -103,9 +80,7 @@ int	theloop(t_info *main)
 
 	if (frame == 600)
 	{
-		mlx_clear_window(main->mlx, main->win);
-		mlx_put_image_to_window(main->mlx, main->win, main->wallimg, 0, 0);
-		mlx_put_image_to_window(main->mlx, main->win, main->pimg, main->ppos_x, main->ppos_y);
+		draw_map(main);
 		// mlx_string_put(main->mlx, main->win, main->ppos_x, main->ppos_y, rgbToColor(0, 255, 255), "@");
 		// mlx_destroy_image(main->mlx, main->img);
 		// main->img = mlx_new_image(main->mlx, main->SIZE_X, main->SIZE_Y);
@@ -125,10 +100,9 @@ int	main(int argc, char *argv[])
 	// void	*connid, *winid;
 	// int	mx, my;	// mouse-x and y
 	t_info	main;
-	char	**matrixmap;
 
 	if (argc > 1)
-		matrixmap = matrix_maker(argv[1]);
+		main.matrixmap = matrix_maker(argv[1]);
 	else
 		return (0);
 
@@ -142,9 +116,9 @@ int	main(int argc, char *argv[])
 	main.ppos_y = 10;
 
 	main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
-	main.pimg = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1.xpm", &main.pimg_width, &main.pimg_height);
+	main.player.tile_img = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1.xpm", &main.player.tile_width, &main.player.tile_height);
 
-	main.wallimg = mlx_xpm_file_to_image(main.mlx, "world_sprites/wall.xpm", &main.wallimg_height, &main.wallimg_height);
+	main.wall.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/wall.xpm", &main.wall.tile_width, &main.wall.tile_width);
 
 	// printf("%d__%d\n", width, height);
 
@@ -159,7 +133,7 @@ int	main(int argc, char *argv[])
 	// mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
 	// mlx_pixel_put(connid, winid, 100, 100, rgbToColor(255, 255, 255));
 
-	ft_printf("%s\n", matrixmap[0]);
+	ft_printf("%s\n", main.matrixmap[0]);
 
 
 	mlx_pixel_put(main.mlx, main.win, 250, 250, rgbToColor(0, 255, 255));

@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/02 15:34:52 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:28:29 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ int draw_map(t_info *worldata)
     char    type;
 
     mlx_clear_window(worldata->mlx, worldata->win);
-    mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->wall.tile_img, 0, 0);
-    mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->player.tile_img, worldata->ppos_x, worldata->ppos_y);
+    // mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->wall.tile_img, 0, 0);
 
     j = 0;
     while (worldata->matrixmap[j] != NULL)
@@ -77,15 +76,20 @@ int draw_map(t_info *worldata)
         {
             //TODO: making 0, 1, ... into an enum and an arry index with corresponding images
             // would be amazing
-            if (type == '1')
-            {
-                mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->wall.tile_img, i*worldata->BYTES, j*worldata->BYTES);
-            }
+            if (type == '0')
+                mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->empspace.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
+            else if (type == '1')
+                mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->wall.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
+            else if (type == 'C')
+                mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->collectible.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
+            else if (type == 'E')
+                mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->mapexit.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
             i++;
             type = worldata->matrixmap[j][i];
         }
         j++;
     }
-        
+    // mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->empspace.tile_img, 50, 50);
+    mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->player.tile_img, worldata->ppos_x, worldata->ppos_y);
     return (1);
 }

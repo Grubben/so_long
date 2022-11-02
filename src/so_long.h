@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 15:35:20 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:28:32 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ typedef struct s_info
 {
 	void	*mlx;
 
-    int     BYTES;
+    int     PIXELS;
 
     // can use t_tile for win
 	void	*win;
 	unsigned int	SIZE_X;
 	unsigned int	SIZE_Y;
 
-	void			*img;
+	// void			*img;
 
 	unsigned int	ppos_x;
 	unsigned int	ppos_y;
@@ -40,8 +40,11 @@ typedef struct s_info
     char            **matrixmap;
 
     t_tile          player;
-
+    
+    t_tile          empspace;
     t_tile          wall;
+    t_tile          collectible;
+    t_tile          mapexit;
 
 	size_t			n_moves;
 }				t_info;

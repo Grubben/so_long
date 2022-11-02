@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 16:59:38 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 17:28:29 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,22 @@ int	keyboardPrinter(int keycode, t_info *worldata)
 {
 	if (keycode == 'w')
 	{
-		worldata->ppos_y -= worldata->BYTES;
+		worldata->ppos_y -= worldata->PIXELS;
 		printf("w\n");
 	}
 	else if (keycode == 'a')
 	{
-		worldata->ppos_x -= worldata->BYTES;
+		worldata->ppos_x -= worldata->PIXELS;
 		printf("a\n");
 	}
 	else if (keycode == 's')
 	{
-		worldata->ppos_y += worldata->BYTES;
+		worldata->ppos_y += worldata->PIXELS;
 		printf("s\n");
 	}
 	else if (keycode == 'd')
 	{
-		worldata->ppos_x += worldata->BYTES;
+		worldata->ppos_x += worldata->PIXELS;
 		printf("d\n");
 	}
 	else if (keycode == 65307)
@@ -107,7 +107,7 @@ int	main(int argc, char *argv[])
 		return (0);
 
 	main.mlx = mlx_init();
-	main.BYTES = 16;	
+	main.PIXELS = 32;	
 	main.SIZE_X = 500;
 	main.SIZE_Y = 500;
 	main.win = mlx_new_window(main.mlx, main.SIZE_X, main.SIZE_Y, "So Long");
@@ -116,10 +116,13 @@ int	main(int argc, char *argv[])
 	main.ppos_x = 0;
 	main.ppos_y = 0;
 
-	main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
-	main.player.tile_img = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1.xpm", &main.player.tile_width, &main.player.tile_height);
+	// main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
+	main.player.tile_img = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1_32.xpm", &main.player.tile_width, &main.player.tile_height);
 
-	main.wall.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/wall.xpm", &main.wall.tile_width, &main.wall.tile_width);
+	main.empspace.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/empty32.xpm", &main.empspace.tile_width, &main.empspace.tile_width);
+	main.wall.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/wall32.xpm", &main.wall.tile_width, &main.wall.tile_width);
+	main.collectible.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/collectible32.xpm", &main.collectible.tile_width, &main.collectible.tile_width);
+	main.mapexit.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/exit32.xpm", &main.mapexit.tile_width, &main.mapexit.tile_width);
 
 	// printf("%d__%d\n", width, height);
 

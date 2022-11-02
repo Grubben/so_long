@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 18:16:24 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:29:52 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,22 @@ int	keyboardPrinter(int keycode, t_info *worldata)
 {
 	if (keycode == 'w')
 	{
-		worldata->ppos_y -= worldata->PIXELS;
+		move_player(0, 1, 1, worldata);
 		printf("w\n");
 	}
 	else if (keycode == 'a')
 	{
-		worldata->ppos_x -= worldata->PIXELS;
+		move_player(-1, 0, 1, worldata);
 		printf("a\n");
 	}
 	else if (keycode == 's')
 	{
-		worldata->ppos_y += worldata->PIXELS;
+		move_player(0, -1, 1, worldata);
 		printf("s\n");
 	}
 	else if (keycode == 'd')
 	{
-		worldata->ppos_x += worldata->PIXELS;
+		move_player(1, 0, 1, worldata);
 		printf("d\n");
 	}
 	else if (keycode == 65307)

@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 17:28:32 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:27:29 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_info
 }				t_info;
 
 
+/*  MAP */
 char    **matrix_maker(char *filename);
 
 int draw_map(t_info *worldata);
@@ -57,3 +58,6 @@ int draw_map(t_info *worldata);
 
 /*  UTILS   */
 void    matrixmap_printer(t_info *worldata);
+
+/*  MOVEMENT    */
+int move_player(int directionx, int directiony, size_t quant, t_info *worldata);

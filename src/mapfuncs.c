@@ -6,13 +6,14 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/10/27 12:40:35 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:46:06 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
 
+// TODO: get ezequiel recursive func to not have to use t_list
 char    **mapToMatrix(char *filename)
 {
     int     fd;
@@ -37,3 +38,5 @@ char    **mapToMatrix(char *filename)
     ft_lstclear(&list, ft_nothing);
     return (matrix);
 }
+
+intdraw_map()

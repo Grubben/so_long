@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 14:37:50 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:58:18 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	main(int argc, char *argv[])
 	char	**matrixmap;
 
 	if (argc > 1)
-		matrixmap = mapToMatrix(argv[1]);
+		matrixmap = matrix_maker(argv[1]);
 	else
 		return (0);
 

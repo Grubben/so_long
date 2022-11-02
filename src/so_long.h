@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 15:14:24 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:35:20 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ typedef struct s_tile
 typedef struct s_info
 {
 	void	*mlx;
-	void	*win;
 
+    int     BYTES;
+
+    // can use t_tile for win
+	void	*win;
 	unsigned int	SIZE_X;
 	unsigned int	SIZE_Y;
 
@@ -49,3 +52,5 @@ char    **matrix_maker(char *filename);
 int draw_map(t_info *worldata);
 
 
+/*  UTILS   */
+void    matrixmap_printer(t_info *worldata);

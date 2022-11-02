@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 15:17:48 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:59:38 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,31 @@ int	windestroy(t_info *main)
 	exit(0);
 }
 
-int	keyboardPrinter(int keycode, t_info *main)
+int	keyboardPrinter(int keycode, t_info *worldata)
 {
 	if (keycode == 'w')
 	{
-		main->ppos_y -= 20;
+		worldata->ppos_y -= worldata->BYTES;
 		printf("w\n");
 	}
 	else if (keycode == 'a')
 	{
-		main->ppos_x -= 20;
+		worldata->ppos_x -= worldata->BYTES;
 		printf("a\n");
 	}
 	else if (keycode == 's')
 	{
-		main->ppos_y += 20;
+		worldata->ppos_y += worldata->BYTES;
 		printf("s\n");
 	}
 	else if (keycode == 'd')
 	{
-		main->ppos_x += 20;
+		worldata->ppos_x += worldata->BYTES;
 		printf("d\n");
 	}
 	else if (keycode == 65307)
 	{
-		windestroy(main);
+		windestroy(worldata);
 	}
 	else
 	{
@@ -87,8 +87,8 @@ int	theloop(t_info *main)
 		// main->pimg = mlx_xpm_file_to_image(main->mlx, "player_sprites/hero1.xpm", &(main->pimg_width), &(main->pimg_height));
 		// printf("%d__%d\n", width, height);
 
-		frame = 0;
-		printf("%d\n", frame);
+		frame = 0;	
+		// printf("%d\n", frame);
 	}
 	frame++;
 	return (frame);
@@ -107,13 +107,14 @@ int	main(int argc, char *argv[])
 		return (0);
 
 	main.mlx = mlx_init();
+	main.BYTES = 16;	
 	main.SIZE_X = 500;
 	main.SIZE_Y = 500;
 	main.win = mlx_new_window(main.mlx, main.SIZE_X, main.SIZE_Y, "So Long");
 	main.n_moves = 0;
 
-	main.ppos_x = 10;
-	main.ppos_y = 10;
+	main.ppos_x = 0;
+	main.ppos_y = 0;
 
 	main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
 	main.player.tile_img = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1.xpm", &main.player.tile_width, &main.player.tile_height);
@@ -133,8 +134,7 @@ int	main(int argc, char *argv[])
 	// mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
 	// mlx_pixel_put(connid, winid, 100, 100, rgbToColor(255, 255, 255));
 
-	ft_printf("%s\n", main.matrixmap[0]);
-
+	matrixmap_printer(&main);
 
 	mlx_pixel_put(main.mlx, main.win, 250, 250, rgbToColor(0, 255, 255));
 

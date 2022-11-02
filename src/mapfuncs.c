@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/02 17:28:29 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:43:06 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int draw_map(t_info *worldata)
         j++;
     }
     // mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->empspace.tile_img, 50, 50);
-    mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->player.tile_img, worldata->ppos_x, worldata->ppos_y);
+    mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->player.tile_img, worldata->ppos_x * worldata->PIXELS, worldata->ppos_y * worldata->PIXELS);
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:20:13 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/02 18:28:51 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:42:21 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,16 @@
 // If cannot, returns 0 
 int move_player(int directionx, int directiony, size_t quant, t_info *worldata)
 {
-    worldata->ppos_x += directionx * quant * worldata->PIXELS;
-    worldata->ppos_y -= directiony * quant * worldata->PIXELS;
+    int    newx;
+    int    newy;
+    
+    newx = worldata->ppos_x + directionx * quant;
+    newy = worldata->ppos_y - directiony * quant;
+    // if ((newx < 0) || (newy < 0))
+    //     return (0);
+    if (worldata->matrixmap[newy][newx] == '1')
+        return (0);
+    worldata->ppos_x = newx;
+    worldata->ppos_y = newy;
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 18:29:52 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:43:52 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ int	main(int argc, char *argv[])
 	main.win = mlx_new_window(main.mlx, main.SIZE_X, main.SIZE_Y, "So Long");
 	main.n_moves = 0;
 
-	main.ppos_x = 0;
-	main.ppos_y = 0;
+	main.ppos_x = 1;
+	main.ppos_y = 3;
 
 	// main.img = mlx_new_image(main.mlx, main.SIZE_X, main.SIZE_Y);
 	main.player.tile_img = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1_32betterback.xpm", &main.player.tile_width, &main.player.tile_height);

@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 18:43:52 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:32:43 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,25 @@ int	keyboardPrinter(int keycode, t_info *worldata)
 
 int	theloop(t_info *main)
 {
-	static int		frame = 0;
+	// static int		frame = 0;
 
-	if (frame == 600)
-	{
-		draw_map(main);
-		// mlx_string_put(main->mlx, main->win, main->ppos_x, main->ppos_y, rgbToColor(0, 255, 255), "@");
-		// mlx_destroy_image(main->mlx, main->img);
-		// main->img = mlx_new_image(main->mlx, main->SIZE_X, main->SIZE_Y);
-		// main->pimg = mlx_xpm_file_to_image(main->mlx, "player_sprites/hero1.xpm", &(main->pimg_width), &(main->pimg_height));
-		// printf("%d__%d\n", width, height);
+	// if (frame == 600)
+	// {
+	// 	draw_map(main);
+	// 	// mlx_string_put(main->mlx, main->win, main->ppos_x, main->ppos_y, rgbToColor(0, 255, 255), "@");
+	// 	// mlx_destroy_image(main->mlx, main->img);
+	// 	// main->img = mlx_new_image(main->mlx, main->SIZE_X, main->SIZE_Y);
+	// 	// main->pimg = mlx_xpm_file_to_image(main->mlx, "player_sprites/hero1.xpm", &(main->pimg_width), &(main->pimg_height));
+	// 	// printf("%d__%d\n", width, height);
 
-		frame = 0;	
-		// printf("%d\n", frame);
-	}
-	frame++;
-	return (frame);
+	// 	frame = 0;	
+	// 	// printf("%d\n", frame);
+	// }
+	// frame++;
+	// return (frame);
+	usleep(16000);
+	draw_map(main);
+	return (1);
 }
 
 int	main(int argc, char *argv[])

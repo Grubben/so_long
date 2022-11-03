@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/03 16:44:27 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/03 18:28:04 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,33 @@ char    **matrix_maker(char *filename)
     
 }
 
-void    matrixmap_printer(t_info *worldata)
+// Checks wether map is rectangular and closed by walls
+int matrixmap_checkp(char **matrixmap)
 {
+    int exitp;
+    int collp;
+    int pp;
+    size_t  lenx;
     size_t  j;
-
-    j = 0;
-    while (worldata->matrixmap[j] != NULL)
+    
+    if (!matrixmap[0])
+        return (0);
+    lenx = ft_strlen(matrixmap[0]);
+    if (!lenx)
+        return (0);
+    //TODO: check if top is all wall
+    j = 1;
+    while (matrixmap[j] != '\0')
     {
-        ft_printf("%s", worldata->matrixmap[j]);
+        // Checks if rectangular
+        if (ft_strlen(matrixmap[j]) != lenx)
+            return (0);
+        // Checks if sided by walls
+        if (matrixmap[j][0] != '1' || matrixmap[j][lenx-1] != '1')
+            return (0);
         j++;
     }
+    //TODO: check if bottom is all wall
 }
 
 int draw_map(t_info *worldata)
@@ -93,4 +110,16 @@ int draw_map(t_info *worldata)
     // mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->empspace.tile_img, 50, 50);
     mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->player.tile_img, worldata->ppos_x * worldata->PIXELS, worldata->ppos_y * worldata->PIXELS);
     return (1);
+}
+
+void    matrixmap_printer(t_info *worldata)
+{
+    size_t  j;
+
+    j = 0;
+    while (worldata->matrixmap[j] != NULL)
+    {
+        ft_printf("%s", worldata->matrixmap[j]);
+        j++;
+    }
 }

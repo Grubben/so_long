@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/03 16:40:07 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/03 21:29:39 by amc              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,17 @@ int	keyboardPrinter(int keycode, t_info *worldata)
 
 int	theloop(t_info *main)
 {
-	usleep(16000);
-	draw_map(main);
+	static int           frame = 0;
+	
+	if (frame == 1600)
+	{
+	      draw_map(main);
+	     frame = 0;
+	 }
+	frame++;
+	return (frame);
+	// usleep(6000);
+	// draw_map(main);
 	return (1);
 }
 

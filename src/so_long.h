@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/02 18:27:29 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:40:45 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,8 @@ void    matrixmap_printer(t_info *worldata);
 
 /*  MOVEMENT    */
 int move_player(int directionx, int directiony, size_t quant, t_info *worldata);
+
+/*  COLOR   */
+void	intbin_append(int *color, unsigned char fam);
+
+int	rgbToColor(unsigned char r, unsigned char g, unsigned char b);

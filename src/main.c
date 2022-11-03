@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/03 16:32:43 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:40:07 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,6 @@
 
 #include <stdio.h>
 
-void	intbin_append(int *color, unsigned char fam)
-{
-	*color = *color << 8;
-	*color = *color | fam;
-}
-
-int	rgbToColor(unsigned char r, unsigned char g, unsigned char b)
-{
-	int		color;
-
-	color = 127; // This is the hard-coded alpha value
-	// Tried changing it and nothing happened so leaving it
-	intbin_append(&color, r);
-	intbin_append(&color, g);
-	intbin_append(&color, b);
-	return (color);
-
-}
 
 int	windestroy(t_info *main)
 {
@@ -76,22 +58,6 @@ int	keyboardPrinter(int keycode, t_info *worldata)
 
 int	theloop(t_info *main)
 {
-	// static int		frame = 0;
-
-	// if (frame == 600)
-	// {
-	// 	draw_map(main);
-	// 	// mlx_string_put(main->mlx, main->win, main->ppos_x, main->ppos_y, rgbToColor(0, 255, 255), "@");
-	// 	// mlx_destroy_image(main->mlx, main->img);
-	// 	// main->img = mlx_new_image(main->mlx, main->SIZE_X, main->SIZE_Y);
-	// 	// main->pimg = mlx_xpm_file_to_image(main->mlx, "player_sprites/hero1.xpm", &(main->pimg_width), &(main->pimg_height));
-	// 	// printf("%d__%d\n", width, height);
-
-	// 	frame = 0;	
-	// 	// printf("%d\n", frame);
-	// }
-	// frame++;
-	// return (frame);
 	usleep(16000);
 	draw_map(main);
 	return (1);
@@ -99,9 +65,6 @@ int	theloop(t_info *main)
 
 int	main(int argc, char *argv[])
 {
-	// printf("%i\n", rgbToColor(127, 0, 0, 255));
-	// void	*connid, *winid;
-	// int	mx, my;	// mouse-x and y
 	t_info	main;
 
 	if (argc > 1)

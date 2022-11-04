@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/04 17:02:37 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:52:01 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,20 @@ int matrixmap_checkp(char **matrixmap)
 {
 	size_t  lenx;
 	size_t  j;
+	size_t	i;
+	char	type;
+	int		pn;	// how many Ps
+	int		en;	// how many EXITs
+	int		cn;	// how many COLLECTIBLEs
 	
 	if (!matrixmap[0])
 		return (0);
 	lenx = ft_strlen(matrixmap[0]);
 	if (!lenx)
 		return (0);
+	pn = 0;
+	en = 0;
+	cn = 0;
 	j = 1;
 	while (matrixmap[j] != NULL)
 	{
@@ -66,11 +74,37 @@ int matrixmap_checkp(char **matrixmap)
 		// Checks if sided by walls
 		if (matrixmap[j][0] != WALL || matrixmap[j][lenx-1] != WALL)
 			return (0);
+		
+		i = 0;
+		type = matrixmap[j][i];
+		while (type != '\0')
+		{
+			if (type == PSTARPOS)
+			{
+				if (pn)
+					return (0);
+				pn = 1;
+			}
+			else if (type == EXIT)
+			{
+				if (en)
+					return (0);
+				en = 1;
+			}
+			else if (type == COLLECT)
+				cn++;
+			
+			i++;
+			type = matrixmap[j][i];
+		}
 		j++;
 	}
 	// Checks if first and last row is all WALL
 	if (!ft_str_isallp(matrixmap[0], WALL) && !ft_str_isallp(matrixmap[j-1], WALL))
 		return (0);
+
+	if (!cn)
+		return (0);	// Need at least 1 collectible
 
 	//TODO: Have to check if there is a valid path
 	return (1);

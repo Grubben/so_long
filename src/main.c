@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/04 17:01:26 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:25:59 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ int	main(int argc, char *argv[])
 	{
 		free(main.matrixmap);
 		ft_printf("Map wrong\n");
+		return (0);
+	}
+
+	if (!vldpath_checkerp(&main))
+	{
+		free(main.matrixmap);
+		ft_printf("No valid path\n");
 		return (0);
 	}
 

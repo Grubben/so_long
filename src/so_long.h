@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/04 17:01:13 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:08:41 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ enum CONSTS
 	EXIT='E',
 	PSTARPOS='P'
 };
+
+typedef struct s_vec2
+{
+	int	x;
+	int	y;
+}				t_vec2;
 
 typedef struct s_tile
 {
@@ -65,6 +71,8 @@ char    **matrix_maker(char *filename);
 int		matrixmap_checkp(char **matrixmap);
 
 int		placeplayer_p(t_info *worldata);
+
+int		vldpath_checkerp(t_info *worldata);
 
 int 	draw_map(t_info *worldata);
 

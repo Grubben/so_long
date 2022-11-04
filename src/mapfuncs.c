@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/04 14:50:57 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:24:16 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ char    **aux(int fd, char **map, size_t count)
 	line = get_next_line(fd);
 
 	if (line)
+	{
+		line[ft_strlen(line)-2] = '\0';	// removes '\n'
 		map = aux(fd, map, count+1);
+	}
 	else
 	{
 		map = malloc(sizeof(char *) * (count + 1));

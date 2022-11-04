@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/04 15:55:53 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 16:03:19 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char    **aux(int fd, char **map, size_t count)
 
 	if (line)
 	{
-		line[ft_strlen(line)-2] = '\0';	// removes '\n'
+		line[ft_strlen(line)-1] = '\0';	// removes '\n'
 		map = aux(fd, map, count+1);
 	}
 	else
@@ -123,7 +123,7 @@ void    matrixmap_printer(t_info *worldata)
 	j = 0;
 	while (worldata->matrixmap[j] != NULL)
 	{
-		ft_printf("%s", worldata->matrixmap[j]);
+		ft_printf("%s\n", worldata->matrixmap[j]);
 		j++;
 	}
 }

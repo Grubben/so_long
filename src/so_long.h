@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/03 17:56:49 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 09:25:27 by amc              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibx-linux/mlx.h"
 #include "libft/libft.h"
 #include <fcntl.h>
+
+enum CONSTS
+{
+    EMPTY,
+    WALL,
+    COLLECT='C',
+    EXIT='E',
+    PSTARPOS='P'
+}   MAP;
 
 typedef struct s_tile
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:20:13 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/03 16:37:38 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 09:28:53 by amc              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int move_player(int directionx, int directiony, size_t quant, t_info *worldata)
     newy = worldata->ppos_y - directiony * quant;
     // if ((newx < 0) || (newy < 0))
     //     return (0);
-    if (worldata->matrixmap[newy][newx] == '1')
+    if (worldata->matrixmap[newy][newx] == WALL)
         return (0);
     worldata->ppos_x = newx;
     worldata->ppos_y = newy;

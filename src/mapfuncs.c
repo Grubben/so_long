@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mapfuncs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/03 18:28:04 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 09:30:39 by amc              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "so_long.h"
-
 
 // Ezequiel
 char    **aux(int fd, char **map, size_t count)
@@ -49,9 +47,9 @@ char    **matrix_maker(char *filename)
 // Checks wether map is rectangular and closed by walls
 int matrixmap_checkp(char **matrixmap)
 {
-    int exitp;
-    int collp;
-    int pp;
+    // int exitp;
+    // int collp;
+    // int pp;
     size_t  lenx;
     size_t  j;
     
@@ -68,11 +66,12 @@ int matrixmap_checkp(char **matrixmap)
         if (ft_strlen(matrixmap[j]) != lenx)
             return (0);
         // Checks if sided by walls
-        if (matrixmap[j][0] != '1' || matrixmap[j][lenx-1] != '1')
+        if (matrixmap[j][0] != WALL || matrixmap[j][lenx-1] != WALL)
             return (0);
         j++;
     }
     //TODO: check if bottom is all wall
+    return (1);
 }
 
 int draw_map(t_info *worldata)
@@ -93,13 +92,13 @@ int draw_map(t_info *worldata)
         {
             //TODO: making 0, 1, ... into an enum and an arry index with corresponding images
             // would be amazing
-            if (type == '0')
+            if (type == EMPTY)
                 mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->empspace.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
-            else if (type == '1')
+            else if (type == WALL)
                 mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->wall.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
-            else if (type == 'C')
+            else if (type == COLLECT)
                 mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->collectible.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
-            else if (type == 'E')
+            else if (type == EXIT)
                 mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->mapexit.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
             i++;
             type = worldata->matrixmap[j][i];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/03 21:29:39 by amc              ###   ########.fr       */
+/*   Updated: 2022/11/04 14:54:01 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ int	main(int argc, char *argv[])
 		main.matrixmap = matrix_maker(argv[1]);
 	else
 		return (0);
+		
+	if (matrixmap_checkp(main.matrixmap))
+		return (0 + free(main.matrixmap));
 
 	main.mlx = mlx_init();
 	main.PIXELS = 32;	

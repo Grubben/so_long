@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/04 14:51:48 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:44:31 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_info
 	t_tile          mapexit;
 
 	size_t			n_moves;
+	int				move_printb;
+	char			*strmoves;
 }				t_info;
 
 

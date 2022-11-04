@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:20:13 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/04 14:37:19 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:45:25 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ int move_player(int directionx, int directiony, size_t quant, t_info *worldata)
 		return (0);
 	worldata->ppos_x = newx;
 	worldata->ppos_y = newy;
+	
 	worldata->n_moves++;
+	if (worldata->move_printb)
+	{
+		free(worldata->strmoves);
+		worldata->strmoves = ft_itoa(worldata->n_moves);
+		if (!worldata->strmoves)
+			return (0); //TODO: leave in a better fashion		
+	}
 	return (1);
 }

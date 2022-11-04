@@ -109,7 +109,8 @@ int draw_map(t_info *worldata)
 		}
 		j++;
 	}
-	mlx_string_put(worldata->mlx, worldata->win, 450, 15, rgbToColor(0, 255, 255), ft_itoa(worldata->n_moves));
+	if (worldata->move_printb)
+		mlx_string_put(worldata->mlx, worldata->win, 450, 15, rgbToColor(0, 255, 255), worldata->strmoves);
 	// mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->empspace.tile_img, 50, 50);
 	mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->player.tile_img, worldata->ppos_x * worldata->PIXELS, worldata->ppos_y * worldata->PIXELS);
 	return (1);

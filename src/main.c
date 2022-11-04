@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/04 14:54:01 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:48:55 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,12 @@ int	main(int argc, char *argv[])
 	else
 		return (0);
 		
-	if (matrixmap_checkp(main.matrixmap))
-		return (0 + free(main.matrixmap));
+	if (!matrixmap_checkp(main.matrixmap))
+	{
+		free(main.matrixmap);
+		ft_printf("Map wrong\n");
+		return (0);
+	}
 
 	main.mlx = mlx_init();
 	main.PIXELS = 32;	
@@ -90,6 +94,9 @@ int	main(int argc, char *argv[])
 	main.SIZE_Y = 500;
 	main.win = mlx_new_window(main.mlx, main.SIZE_X, main.SIZE_Y, "So Long");
 	main.n_moves = 0;
+	main.move_printb = 0;
+	if (main.move_printb)
+		main.strmoves = ft_itoa(0);
 
 	main.ppos_x = 1;
 	main.ppos_y = 3;

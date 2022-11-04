@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/04 15:24:16 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:55:53 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int matrixmap_checkp(char **matrixmap)
 			return (0);
 		j++;
 	}
-	if (ft_str_isallp(matrixmap[0], WALL) && ft_str_isallp(matrixmap[j-1], WALL))
+	if (!ft_str_isallp(matrixmap[0], WALL) && !ft_str_isallp(matrixmap[j-1], WALL))
 		return (0);
 
 	return (1);

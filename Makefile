@@ -40,6 +40,7 @@ fclean		: clean
 				$(RM) $(NAME)
 				$(RM) $(MINILIBX)
 				# $(MAKE) -C src/minilibx-linux fclean
+				$(MAKE) -C src/libft fclean
 				$(RM) $(LIBFT)
 
 re			: fclean $(NAME)

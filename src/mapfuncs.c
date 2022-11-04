@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapfuncs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/04 09:30:39 by amc              ###   ########.fr       */
+/*   Updated: 2022/11/04 14:30:59 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int matrixmap_checkp(char **matrixmap)
         return (0);
     //TODO: check if top is all wall
     j = 1;
-    while (matrixmap[j] != '\0')
+    while (matrixmap[j] != NULL)
     {
         // Checks if rectangular
         if (ft_strlen(matrixmap[j]) != lenx)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/04 09:25:27 by amc              ###   ########.fr       */
+/*   Updated: 2022/11/04 14:31:02 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 enum CONSTS
 {
-    EMPTY,
-    WALL,
+    EMPTY='0',
+    WALL='1',
     COLLECT='C',
     EXIT='E',
     PSTARPOS='P'
-}   MAP;
+};
 
 typedef struct s_tile
 {

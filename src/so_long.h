@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/04 15:44:31 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:01:13 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ typedef struct s_info
 	unsigned int	SIZE_X;
 	unsigned int	SIZE_Y;
 
-	// void			*img;
-
 	unsigned int	ppos_x;
 	unsigned int	ppos_y;
 
@@ -65,6 +63,8 @@ typedef struct s_info
 char    **matrix_maker(char *filename);
 
 int		matrixmap_checkp(char **matrixmap);
+
+int		placeplayer_p(t_info *worldata);
 
 int 	draw_map(t_info *worldata);
 

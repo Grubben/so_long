@@ -14,23 +14,23 @@
 
 int		pthchk(int x, int y, char **matrixmap)
 {
-	if (matrixmap[y][x] != PSTARTPOS)
+	if (matrixmap[y][x] == EXIT)
 	{
 		return (1);
 	}
-	if (matrixmap[y - 1][x] != WALL)
+	else if (matrixmap[y - 1][x] != WALL)
 	{
 		return (pthchk(x, y - 1, matrixmap));
 	}
-	if (matrixmap[y][x + 1] != WALL)
+	else if (matrixmap[y][x + 1] != WALL)
 	{
 		return (pthchk(x + 1, y, matrixmap));
 	}
-	if (matrixmap[y + 1][x] != WALL)
+	else if (matrixmap[y + 1][x] != WALL)
 	{
 		return (pthchk(x, y + 1, matrixmap));
 	}
-	if (matrixmap[y][x - 1] != WALL)
+	else if (matrixmap[y][x - 1] != WALL)
 	{
 		return (pthchk(x - 1, y + 1, matrixmap));
 	}

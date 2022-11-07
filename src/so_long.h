@@ -76,7 +76,7 @@ int		vldpath_checkerp(t_info *worldata);
 
 int 	draw_map(t_info *worldata);
 
-void    matrixmap_printer(t_info *worldata);
+void    matrixmap_printer(char **matrixmap);
 
 
 /*  MOVEMENT    */

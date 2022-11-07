@@ -88,18 +88,21 @@ int	main(int argc, char *argv[])
 		return (0);
 	}
 
-	if (!vldpath_checkerp(&main))
-	{
-		free(main.matrixmap);
-		ft_printf("No valid path\n");
-		return (0);
-	}
+	placeplayer_p(&main);
+	// if (!vldpath_checkerp(&main))
+	// {
+	// 	free(main.matrixmap);
+	// 	ft_printf("No valid path\n");
+	// 	return (0);
+	// }
+	// else
+	// 	ft_printf("Map has Valid Path\n");
 
 	main.mlx = mlx_init();
 	main.PIXELS = 32;	
 	
-	main.SIZE_X = 500;
-	main.SIZE_Y = 500;
+	main.SIZE_X = main.PIXELS * ft_strlen(*main.matrixmap);
+	main.SIZE_Y = main.PIXELS * ft_strlen(*main.matrixmap);
 	main.win = mlx_new_window(main.mlx, main.SIZE_X, main.SIZE_Y, "So Long");
 	
 	main.n_moves = 0;
@@ -107,7 +110,6 @@ int	main(int argc, char *argv[])
 	if (main.move_printb)
 		main.strmoves = ft_itoa(0);
 
-	placeplayer_p(&main);
 
 	main.player.tile_img = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1_32betterback.xpm", &main.player.tile_width, &main.player.tile_height);
 
@@ -129,7 +131,7 @@ int	main(int argc, char *argv[])
 	// mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
 	// mlx_pixel_put(connid, winid, 100, 100, rgbToColor(255, 255, 255));
 
-	matrixmap_printer(&main);
+	matrixmap_printer(main.matrixmap);
 
 	mlx_pixel_put(main.mlx, main.win, 250, 250, rgbToColor(0, 255, 255));
 

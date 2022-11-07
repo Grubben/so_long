@@ -171,14 +171,14 @@ int		placeplayer_p(t_info *worldata)
 // }
 
 
-void    matrixmap_printer(t_info *worldata)
+void    matrixmap_printer(char **matrixmap)
 {
 	size_t  j;
 
 	j = 0;
-	while (worldata->matrixmap[j] != NULL)
+	while (matrixmap[j] != NULL)
 	{
-		ft_printf("%s\n", worldata->matrixmap[j]);
+		ft_printf("%s\n", matrixmap[j]);
 		j++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/07 17:32:46 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/07 17:47:46 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	theloop(t_info *main)
 	return (frame);
 	// usleep(6000);
 	// draw_map(main);
-	return (1);
 }
 
 int	world_init(t_info *worldata)
@@ -93,10 +92,10 @@ int	main(int argc, char *argv[])
 	else
 		return (0);
 
-	if (!main.matrixmap && main.matrixmap[0])
+	if (!(*main.matrixmap))
 	{
 		free(main.matrixmap);
-		destroy(&main);
+		return (0);
 	}
 	world_init(&main);
 	matrixmap_printer(main.matrixmap);

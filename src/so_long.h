@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/07 17:34:56 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/07 17:47:02 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,4 @@ int rgbToColor(unsigned char r, unsigned char g, unsigned char b);
 int draw_map(t_info *worldata);
 
 /*	MAIN	*/
-int destroy(t_info *main);
+int destroy(t_info *worldata);

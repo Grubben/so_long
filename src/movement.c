@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:20:13 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/07 17:28:04 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/07 17:53:14 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ int move_player(int directionx, int directiony, size_t quant, t_info *worldata)
 	int    newx;
 	int    newy;
 	
-	newx = worldata->ppos_x + directionx * quant;
-	newy = worldata->ppos_y - directiony * quant;
-	// if ((newx < 0) || (newy < 0))
-	//     return (0);
+	newx = worldata->ppos_x + directionx * (long)quant;
+	newy = worldata->ppos_y - directiony * (long)quant;
+	//TODO: make these into asserts or take them out
+	if ((newx < 0) || (newy < 0))
+	    return (0);
 	if (worldata->matrixmap[newy][newx] == WALL)
 		return (0);
 	worldata->ppos_x = newx;

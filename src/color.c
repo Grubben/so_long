@@ -37,7 +37,7 @@ int draw_map(t_info *worldata)
 	size_t  i;
 	char    type;
 
-	mlx_clear_window(worldata->mlx, worldata->win);
+	mlx_clear_window(worldata->mlx, worldata->win.tile_ptr);
 	j = 0;
 	while (worldata->matrixmap[j] != NULL)
 	{
@@ -46,20 +46,20 @@ int draw_map(t_info *worldata)
 		while (type != '\0')
 		{
 			if (type == EMPTY)
-				mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->empspace.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
+				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->empspace.tile_ptr, i*worldata->PIXELS, j*worldata->PIXELS);
 			else if (type == WALL)
-				mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->wall.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
+				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->wall.tile_ptr, i*worldata->PIXELS, j*worldata->PIXELS);
 			else if (type == COLLECT)
-				mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->collectible.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
+				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->collectible.tile_ptr, i*worldata->PIXELS, j*worldata->PIXELS);
 			else if (type == EXIT)
-				mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->mapexit.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
+				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->mapexit.tile_ptr, i*worldata->PIXELS, j*worldata->PIXELS);
 			i++;
 			type = worldata->matrixmap[j][i];
 		}
 		j++;
 	}
 	if (worldata->move_printb)
-		mlx_string_put(worldata->mlx, worldata->win, 450, 15, rgbToColor(0, 255, 255), worldata->strmoves);
-	mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->player.tile_img, worldata->ppos_x * worldata->PIXELS, worldata->ppos_y * worldata->PIXELS);
+		mlx_string_put(worldata->mlx, worldata->win.tile_ptr, 450, 15, rgbToColor(0, 255, 255), worldata->strmoves);
+	mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->player.tile_ptr, worldata->ppos_x * worldata->PIXELS, worldata->ppos_y * worldata->PIXELS);
 	return (1);
 }

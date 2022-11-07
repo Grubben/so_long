@@ -18,13 +18,13 @@
 
 int	destroy(t_info *worldata)
 {
-	mlx_destroy_window(worldata->mlx, worldata->win);
+	mlx_destroy_window(worldata->mlx, worldata->win.tile_ptr);
 
-	mlx_destroy_image(worldata->mlx, worldata->player.tile_img);
-	mlx_destroy_image(worldata->mlx, worldata->empspace.tile_img);
-	mlx_destroy_image(worldata->mlx, worldata->wall.tile_img);
-	mlx_destroy_image(worldata->mlx, worldata->collectible.tile_img);
-	mlx_destroy_image(worldata->mlx, worldata->mapexit.tile_img);
+	mlx_destroy_image(worldata->mlx, worldata->player.tile_ptr);
+	mlx_destroy_image(worldata->mlx, worldata->empspace.tile_ptr);
+	mlx_destroy_image(worldata->mlx, worldata->wall.tile_ptr);
+	mlx_destroy_image(worldata->mlx, worldata->collectible.tile_ptr);
+	mlx_destroy_image(worldata->mlx, worldata->mapexit.tile_ptr);
 	if (worldata->move_printb)
 		free(worldata->strmoves);
 	
@@ -82,6 +82,42 @@ int	theloop(t_info *main)
 	return (1);
 }
 
+int	world_init(t_info *worldata)
+{
+	worldata->n_collectibles = 0;
+	worldata->n_collected = 0;
+	if (!matrixmap_checkandsetp(worldata))
+	{
+		free(worldata->matrixmap);
+		ft_printf("Map wrong\n");
+		return (0);
+	}
+
+	placeplayer_p(worldata);
+
+	worldata->mlx = mlx_init();
+	worldata->PIXELS = 32;	
+	
+	worldata->win.tile_width = worldata->PIXELS * ft_strlen(*worldata->matrixmap);
+	worldata->win.tile_height = worldata->PIXELS * ft_strlen(*worldata->matrixmap);
+	worldata->win.tile_ptr = mlx_new_window(worldata->mlx, worldata->win.tile_width, worldata->win.tile_height, "So Long");
+	
+	worldata->n_moves = 0;
+	worldata->move_printb = 0;
+	if (worldata->move_printb)
+		worldata->strmoves = ft_itoa(0);
+
+
+	worldata->player.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "player_sprites/hero1_32betterback.xpm", &worldata->player.tile_width, &worldata->player.tile_height);
+
+	worldata->empspace.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/empty32.xpm", &worldata->empspace.tile_width, &worldata->empspace.tile_width);
+	worldata->wall.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/wall32.xpm", &worldata->wall.tile_width, &worldata->wall.tile_width);
+	worldata->collectible.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/collectible32.xpm", &worldata->collectible.tile_width, &worldata->collectible.tile_width);
+	worldata->mapexit.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/exit32.xpm", &worldata->mapexit.tile_width, &worldata->mapexit.tile_width);
+	worldata->n_collected = 0;
+	return (1);	
+}
+
 int	main(int argc, char *argv[])
 {
 	t_info	main;
@@ -90,72 +126,17 @@ int	main(int argc, char *argv[])
 		main.matrixmap = matrix_maker(argv[1]);
 	else
 		return (0);
-	
-	main.n_collectibles = 0;
-	main.n_collected = 0;
-	if (!matrixmap_checkp(&main))
-	{
-		free(main.matrixmap);
-		ft_printf("Map wrong\n");
-		return (0);
-	}
 
-	placeplayer_p(&main);
-	// if (!vldpath_checkerp(&main))
-	// {
-	// 	free(main.matrixmap);
-	// 	ft_printf("No valid path\n");
-	// 	return (0);
-	// }
-	// else
-	// 	ft_printf("Map has Valid Path\n");
-
-	main.mlx = mlx_init();
-	main.PIXELS = 32;	
-	
-	main.SIZE_X = main.PIXELS * ft_strlen(*main.matrixmap);
-	main.SIZE_Y = main.PIXELS * ft_strlen(*main.matrixmap);
-	main.win = mlx_new_window(main.mlx, main.SIZE_X, main.SIZE_Y, "So Long");
-	
-	main.n_moves = 0;
-	main.move_printb = 0;
-	if (main.move_printb)
-		main.strmoves = ft_itoa(0);
-
-
-	main.player.tile_img = mlx_xpm_file_to_image(main.mlx, "player_sprites/hero1_32betterback.xpm", &main.player.tile_width, &main.player.tile_height);
-
-	main.empspace.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/empty32.xpm", &main.empspace.tile_width, &main.empspace.tile_width);
-	main.wall.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/wall32.xpm", &main.wall.tile_width, &main.wall.tile_width);
-	main.collectible.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/collectible32.xpm", &main.collectible.tile_width, &main.collectible.tile_width);
-	main.mapexit.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/exit32.xpm", &main.mapexit.tile_width, &main.mapexit.tile_width);
-	main.n_collected = 0;
-	// printf("%d__%d\n", width, height);
-
-
-	// mlx_put_image_to_window(main.mlx, main.win, main.img, main.ppos_x, main.ppos_y);
-
-	// mlx_string_put(main.mlx, main.win, main.ppos_x, main.ppos_y, rgbToColor(0, 255, 255), "@");
-
-
-	// mlx_string_put(connid, winid, 50, 150, rgbToColor(255, 0, 0), "YAY");
-	// mlx_string_put(connid, winid, 50, 100, rgbToColor(0, 255, 0), "YAY");
-	// mlx_string_put(connid, winid, 50, 50, rgbToColor(0, 0, 255), "YAY");
-	// mlx_pixel_put(connid, winid, 100, 100, rgbToColor(255, 255, 255));
-
+	world_init(&main);
 	matrixmap_printer(main.matrixmap);
 
-	mlx_pixel_put(main.mlx, main.win, 250, 250, rgbToColor(0, 255, 255));
-
 	mlx_loop_hook(main.mlx, theloop, &main);
-
-
 	// Figuring out how hooks work.
 	// These 2 are (not) exactly the same
-	mlx_hook(main.win, 02, 1L<<0, keyboardPrinter, &main); // on key press
+	mlx_hook(main.win.tile_ptr, 02, 1L<<0, keyboardPrinter, &main); // on key press
 	// mlx_key_hook(main.win, keyboardPrinter, &main); // on key release
 
-	mlx_hook(main.win, 17, 0L, destroy, &main); // DestroyNotify of the window
+	mlx_hook(main.win.tile_ptr, 17, 0L, destroy, &main); // DestroyNotify of the window
 	mlx_loop(main.mlx);
 
 	

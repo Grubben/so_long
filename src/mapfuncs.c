@@ -47,7 +47,7 @@ char    **matrix_maker(char *filename)
 }
 
 // Checks wether map is rectangular and closed by walls
-int matrixmap_checkp(t_info *worldata)
+int matrixmap_checkandsetp(t_info *worldata)
 {
 	char	**mtrxmap;
 	size_t  lenx;
@@ -92,9 +92,7 @@ int matrixmap_checkp(t_info *worldata)
 				en = 1;
 			}
 			else if (type == COLLECT)
-
 				worldata->n_collectibles++;
-			
 			i++;
 			type = mtrxmap[j][i];
 		}
@@ -103,11 +101,8 @@ int matrixmap_checkp(t_info *worldata)
 	// Checks if first and last row is all WALL
 	if (!ft_str_isallp(mtrxmap[0], WALL) && !ft_str_isallp(mtrxmap[j-1], WALL))
 		return (0);
-
 	if (!worldata->n_collectibles)
 		return (0);	// Need at least 1 collectible
-
-	//TODO: Have to check if there is a valid path
 	return (1);
 }
 

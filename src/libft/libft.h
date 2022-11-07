@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:39:23 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/04 14:44:03 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:45:27 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	*ft_memset(void *b, int c, size_t len);
 
 void	ft_bzero(void *s, size_t n);
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memcpy(void *dst, const void *src, size_t len);
 
-void	*ft_memmove(void *dest, const void *src, size_t n);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
@@ -164,7 +164,7 @@ void	ft_lstprint(t_list *head);
 
 t_list	*ft_lstcpy(t_list *lst);
 
-char    **ft_lsttoarr(t_list *lst);
+char	**ft_lsttoarr(t_list *lst);
 
 int		ft_charinside(char c, const char *s);
 
@@ -178,9 +178,9 @@ int		ft_smin(long long a, long long b);
 
 int		ft_smax(long long a, long long b);
 
-void	ft_nothing();
+void	ft_nothing(void);
 
-int	ft_str_isallp(char *str, char c);
+int		ft_str_isallp(char *str, char c);
 
 /* FT_PRINTF */
 int		ft_printf(const char *format, ...);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   mapfuncs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/07 11:34:11 by amc              ###   ########.fr       */
+/*   Updated: 2022/11/07 17:35:19 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // Ezequiel
-char    **aux(int fd, char **map, size_t count)
+static char    **aux(int fd, char **map, size_t count)
 {
 	char *line;
 
@@ -46,94 +46,6 @@ char    **matrix_maker(char *filename)
 	
 }
 
-// Checks wether map is rectangular and closed by walls
-int matrixmap_checkandsetp(t_info *worldata)
-{
-	char	**mtrxmap;
-	size_t  lenx;
-	size_t  j;
-	size_t	i;
-	char	type;
-	int		pn;	// how many Ps
-	int		en;	// how many EXITs
-	
-	mtrxmap = worldata->matrixmap;
-	if (!mtrxmap[0])
-		return (0);
-	lenx = ft_strlen(mtrxmap[0]);
-	if (!lenx)
-		return (0);
-	pn = 0;
-	en = 0;
-	j = 1;
-	while (mtrxmap[j] != NULL)
-	{
-		// Checks if rectangular
-		if (ft_strlen(mtrxmap[j]) != lenx)
-			return (0);
-		// Checks if sided by walls
-		if (mtrxmap[j][0] != WALL || mtrxmap[j][lenx-1] != WALL)
-			return (0);
-		
-		i = 0;
-		type = mtrxmap[j][i];
-		while (type != '\0')
-		{
-			if (type == PSTARTPOS)
-			{
-				if (pn)
-					return (0);
-				pn = 1;
-			}
-			else if (type == EXIT)
-			{
-				if (en)
-					return (0);
-				en = 1;
-			}
-			else if (type == COLLECT)
-				worldata->n_collectibles++;
-			i++;
-			type = mtrxmap[j][i];
-		}
-		j++;
-	}
-	// Checks if first and last row is all WALL
-	if (!ft_str_isallp(mtrxmap[0], WALL) && !ft_str_isallp(mtrxmap[j-1], WALL))
-		return (0);
-	if (!worldata->n_collectibles)
-		return (0);	// Need at least 1 collectible
-	return (1);
-}
-
-int		placeplayer_p(t_info *worldata)
-{
-	size_t	j;
-	size_t	i;
-	char	type;
-	
-	j = 0;
-	i = 0;
-	while (worldata->matrixmap[j] != NULL)
-	{
-		i = 0;
-		type = worldata->matrixmap[j][i];
-		while (type != '\0')
-		{
-			if (type == PSTARTPOS)
-			{
-				worldata->ppos_x = i;
-				worldata->ppos_y = j;
-				worldata->matrixmap[j][i] = EMPTY;	//Overwrites P to EMPTY
-				return (1);
-			}
-			i++;
-			type = worldata->matrixmap[j][i];
-		}
-		j++;
-	}
-	return (0);
-}
 
 // int		pthchk(int x, int y, char **matrixmap)
 // {

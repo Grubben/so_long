@@ -44,9 +44,6 @@ typedef struct s_info
 
 	// can use t_tile for win
 	t_tile win;
-	// void	*win;
-	// unsigned int SIZE_X;
-	// unsigned int	SIZE_Y;
 
 	unsigned int ppos_x;
 	unsigned int ppos_y;
@@ -72,15 +69,14 @@ typedef struct s_info
 /*  MAP */
 char **matrix_maker(char *filename);
 
-int matrixmap_checkandsetp(t_info *worldata);
-
-int placeplayer_p(t_info *worldata);
-
-int vldpath_checkerp(t_info *worldata);
-
-int draw_map(t_info *worldata);
-
 void matrixmap_printer(char **matrixmap);
+
+/*	CHECKS	*/
+int mtrx_checkwallsp(t_info *worldata);
+
+int	mtrx_checkmp(t_info *worldata);
+
+// int vldpath_checkerp(t_info *worldata);
 
 /*  MOVEMENT    */
 int move_player(int directionx, int directiony, size_t quant, t_info *worldata);
@@ -91,6 +87,8 @@ int	keyboardPrinter(int keycode, t_info *worldata);
 void intbin_append(int *color, unsigned char fam);
 
 int rgbToColor(unsigned char r, unsigned char g, unsigned char b);
+
+int draw_map(t_info *worldata);
 
 /*	MAIN	*/
 int destroy(t_info *main);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/04 18:25:59 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:52:31 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,6 @@ int	destroy(t_info *worldata)
 	mlx_destroy_display(worldata->mlx);
 	exit(0);
 }
-
-int	keyboardPrinter(int keycode, t_info *worldata)
-{
-	if (keycode == 'w')
-	{
-		move_player(0, 1, 1, worldata);
-		printf("w\n");
-	}
-	else if (keycode == 'a')
-	{
-		move_player(-1, 0, 1, worldata);
-		printf("a\n");
-	}
-	else if (keycode == 's')
-	{
-		move_player(0, -1, 1, worldata);
-		printf("s\n");
-	}
-	else if (keycode == 'd')
-	{
-		move_player(1, 0, 1, worldata);
-		printf("d\n");
-	}
-	else if (keycode == 65307)
-	{
-		destroy(worldata);
-	}
-	else
-	{
-		printf("k%i\n", keycode);
-	}
-	return (1);
-}
-
 
 int	theloop(t_info *main)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/07 11:34:11 by amc              ###   ########.fr       */
+/*   Updated: 2022/11/07 17:34:56 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void matrixmap_printer(char **matrixmap);
 
 /*  MOVEMENT    */
 int move_player(int directionx, int directiony, size_t quant, t_info *worldata);
+
+int	keyboardPrinter(int keycode, t_info *worldata);
 
 /*  COLOR   */
 void intbin_append(int *color, unsigned char fam);

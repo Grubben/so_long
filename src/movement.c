@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:20:13 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/04 15:45:25 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:52:37 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,38 @@ int move_player(int directionx, int directiony, size_t quant, t_info *worldata)
 			return (0); //TODO: leave in a better fashion		
 	}
 	chck_events(worldata);
+	return (1);
+}
+
+int	keyboardPrinter(int keycode, t_info *worldata)
+{
+	if (keycode == 'w')
+	{
+		move_player(0, 1, 1, worldata);
+		printf("w\n");
+	}
+	else if (keycode == 'a')
+	{
+		move_player(-1, 0, 1, worldata);
+		printf("a\n");
+	}
+	else if (keycode == 's')
+	{
+		move_player(0, -1, 1, worldata);
+		printf("s\n");
+	}
+	else if (keycode == 'd')
+	{
+		move_player(1, 0, 1, worldata);
+		printf("d\n");
+	}
+	else if (keycode == 65307)
+	{
+		destroy(worldata);
+	}
+	else
+	{
+		printf("k%i\n", keycode);
+	}
 	return (1);
 }

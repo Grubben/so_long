@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/04 18:08:41 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/07 11:34:11 by amc              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ enum CONSTS
 	WALL='1',
 	COLLECT='C',
 	EXIT='E',
-	PSTARPOS='P'
+	PSTARTPOS='P'
 };
 
 typedef struct s_vec2

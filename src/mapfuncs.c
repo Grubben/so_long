@@ -6,7 +6,7 @@
 /*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/07 11:11:20 by amc              ###   ########.fr       */
+/*   Updated: 2022/11/07 11:34:11 by amc              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int matrixmap_checkp(char **matrixmap)
 		type = matrixmap[j][i];
 		while (type != '\0')
 		{
-			if (type == PSTARPOS)
+			if (type == PSTARTPOS)
 			{
 				if (pn)
 					return (0);
@@ -124,7 +124,7 @@ int		placeplayer_p(t_info *worldata)
 		type = worldata->matrixmap[j][i];
 		while (type != '\0')
 		{
-			if (type == PSTARPOS)
+			if (type == PSTARTPOS)
 			{
 				worldata->ppos_x = i;
 				worldata->ppos_y = j;
@@ -139,69 +139,37 @@ int		placeplayer_p(t_info *worldata)
 	return (0);
 }
 
-int		pthchk(int x, int y, char **matrixmap)
-{
-	if (matrixmap[y][x] == EXIT)
-		return (1);
-	else if (matrixmap[y][x] == WALL)
-		return (0);
-	// else
-	return (pthchk(x + 1, y, matrixmap) || pthchk(x, y + 1, matrixmap)
-			|| pthchk(x - 1, y, matrixmap) || pthchk(x, y - 1, matrixmap) || pthchk(x - 1, y - 1, matrixmap));
-}
+// int		pthchk(int x, int y, char **matrixmap)
+// {
+// 	if (matrixmap[y][x] == EXIT)
+// 		return (1);
+// 	else if (matrixmap[y][x] == WALL)
+// 		return (0);
+// 	// else
+// 	return (pthchk(x + 1, y, matrixmap) || pthchk(x, y + 1, matrixmap)
+// 			|| pthchk(x - 1, y, matrixmap) || pthchk(x, y - 1, matrixmap) || pthchk(x - 1, y - 1, matrixmap));
+// }
 
-int		directedchk(int x, int y, int direcx, int direcy, char **matrixmap)
-{
-	if (matrixmap[y][x] == EXIT)
-		return (1);
-	else if (matrixmap[y][x] == WALL)
-		return (
-			directedchk(x - 1, y - 1, 0, -1, matrixmap) || directedchk(x - 1, y - 1, y + 1, 0, matrixmap)
-		);
-	// else
-	return (directedchk(x + direcx, y + direcy, direcx, direcy, matrixmap));
+// int		directedchk(int x, int y, int direcx, int direcy, char **matrixmap)
+// {
+// 	if (matrixmap[y][x] == EXIT)
+// 		return (1);
+// 	else if (matrixmap[y][x] == WALL)
+// 		return (
+// 			directedchk(x - 1, y - 1, 0, -1, matrixmap) || directedchk(x - 1, y - 1, y + 1, 0, matrixmap)
+// 		);
+// 	// else
+// 	return (directedchk(x + direcx, y + direcy, direcx, direcy, matrixmap));
 	
-}
+// }
 
-// Checks if there exists a valid path between P and E
-int		vldpath_checkerp(t_info *worldata)
-{
-	// return (pthchk(worldata->ppos_x, worldata->ppos_y, worldata->matrixmap));
-	return (directedchk(worldata->ppos_x, worldata->ppos_y, 1, 0, worldata->matrixmap));
-}
+// // Checks if there exists a valid path between P and E
+// int		vldpath_checkerp(t_info *worldata)
+// {
+// 	// return (pthchk(worldata->ppos_x, worldata->ppos_y, worldata->matrixmap));
+// 	return (directedchk(worldata->ppos_x, worldata->ppos_y, 1, 0, worldata->matrixmap));
+// }
 
-int draw_map(t_info *worldata)
-{
-	size_t  j;
-	size_t  i;
-	char    type;
-
-	mlx_clear_window(worldata->mlx, worldata->win);
-	j = 0;
-	while (worldata->matrixmap[j] != NULL)
-	{
-		i = 0;
-		type = worldata->matrixmap[j][i];
-		while (type != '\0')
-		{
-			if (type == EMPTY)
-				mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->empspace.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
-			else if (type == WALL)
-				mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->wall.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
-			else if (type == COLLECT)
-				mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->collectible.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
-			else if (type == EXIT)
-				mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->mapexit.tile_img, i*worldata->PIXELS, j*worldata->PIXELS);
-			i++;
-			type = worldata->matrixmap[j][i];
-		}
-		j++;
-	}
-	if (worldata->move_printb)
-		mlx_string_put(worldata->mlx, worldata->win, 450, 15, rgbToColor(0, 255, 255), worldata->strmoves);
-	mlx_put_image_to_window(worldata->mlx, worldata->win, worldata->player.tile_img, worldata->ppos_x * worldata->PIXELS, worldata->ppos_y * worldata->PIXELS);
-	return (1);
-}
 
 void    matrixmap_printer(t_info *worldata)
 {

@@ -12,6 +12,26 @@
 
 #include "so_long.h"
 
+// Checks for events(collectibles or exit)
+// Returns 1 if yes, 0 if no
+int	chck_events(t_info *worldata)
+{
+	if (worldata->matrixmap[worldata->ppos_y][worldata->ppos_x] == COLLECT)
+	{
+		worldata->n_collected++;
+		worldata->matrixmap[worldata->ppos_y][worldata->ppos_x] = EMPTY;
+		return (1);
+	}
+	if (worldata->matrixmap[worldata->ppos_y][worldata->ppos_x] == EXIT)
+	{
+		if (worldata->n_collectibles == worldata->n_collected)
+		{
+			destroy(worldata);
+		}
+	}
+	return (0);
+}
+
 // Moves player in specified direction.
 // If cannot, returns 0 
 int move_player(int directionx, int directiony, size_t quant, t_info *worldata)
@@ -36,5 +56,6 @@ int move_player(int directionx, int directiony, size_t quant, t_info *worldata)
 		if (!worldata->strmoves)
 			return (0); //TODO: leave in a better fashion		
 	}
+	chck_events(worldata);
 	return (1);
 }

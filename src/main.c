@@ -16,9 +16,19 @@
 #include <stdio.h>
 
 
-int	windestroy(t_info *main)
+int	destroy(t_info *worldata)
 {
-	mlx_destroy_window(main->mlx, main->win);
+	mlx_destroy_window(worldata->mlx, worldata->win);
+
+	mlx_destroy_image(worldata->mlx, worldata->player.tile_img);
+	mlx_destroy_image(worldata->mlx, worldata->empspace.tile_img);
+	mlx_destroy_image(worldata->mlx, worldata->wall.tile_img);
+	mlx_destroy_image(worldata->mlx, worldata->collectible.tile_img);
+	mlx_destroy_image(worldata->mlx, worldata->mapexit.tile_img);
+	if (worldata->move_printb)
+		free(worldata->strmoves);
+	
+	mlx_destroy_display(worldata->mlx);
 	exit(0);
 }
 
@@ -46,7 +56,7 @@ int	keyboardPrinter(int keycode, t_info *worldata)
 	}
 	else if (keycode == 65307)
 	{
-		windestroy(worldata);
+		destroy(worldata);
 	}
 	else
 	{
@@ -80,8 +90,10 @@ int	main(int argc, char *argv[])
 		main.matrixmap = matrix_maker(argv[1]);
 	else
 		return (0);
-		
-	if (!matrixmap_checkp(main.matrixmap))
+	
+	main.n_collectibles = 0;
+	main.n_collected = 0;
+	if (!matrixmap_checkp(&main))
 	{
 		free(main.matrixmap);
 		ft_printf("Map wrong\n");
@@ -117,7 +129,7 @@ int	main(int argc, char *argv[])
 	main.wall.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/wall32.xpm", &main.wall.tile_width, &main.wall.tile_width);
 	main.collectible.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/collectible32.xpm", &main.collectible.tile_width, &main.collectible.tile_width);
 	main.mapexit.tile_img = mlx_xpm_file_to_image(main.mlx, "world_sprites/exit32.xpm", &main.mapexit.tile_width, &main.mapexit.tile_width);
-
+	main.n_collected = 0;
 	// printf("%d__%d\n", width, height);
 
 
@@ -143,7 +155,7 @@ int	main(int argc, char *argv[])
 	mlx_hook(main.win, 02, 1L<<0, keyboardPrinter, &main); // on key press
 	// mlx_key_hook(main.win, keyboardPrinter, &main); // on key release
 
-	mlx_hook(main.win, 17, 0L, windestroy, &main); // DestroyNotify of the window
+	mlx_hook(main.win, 17, 0L, destroy, &main); // DestroyNotify of the window
 	mlx_loop(main.mlx);
 
 	

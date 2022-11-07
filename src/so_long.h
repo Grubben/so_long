@@ -56,7 +56,11 @@ typedef struct s_info
 	
 	t_tile          empspace;
 	t_tile          wall;
+
 	t_tile          collectible;
+	size_t			n_collectibles;
+	size_t			n_collected;
+
 	t_tile          mapexit;
 
 	size_t			n_moves;
@@ -68,7 +72,7 @@ typedef struct s_info
 /*  MAP */
 char    **matrix_maker(char *filename);
 
-int		matrixmap_checkp(char **matrixmap);
+int		matrixmap_checkp(t_info *worldata);
 
 int		placeplayer_p(t_info *worldata);
 
@@ -87,3 +91,6 @@ int 	move_player(int directionx, int directiony, size_t quant, t_info *worldata)
 void	intbin_append(int *color, unsigned char fam);
 
 int		rgbToColor(unsigned char r, unsigned char g, unsigned char b);
+
+/*	MAIN	*/
+int	destroy(t_info *main);

@@ -47,36 +47,36 @@ char    **matrix_maker(char *filename)
 }
 
 // Checks wether map is rectangular and closed by walls
-int matrixmap_checkp(char **matrixmap)
+int matrixmap_checkp(t_info *worldata)
 {
+	char	**mtrxmap;
 	size_t  lenx;
 	size_t  j;
 	size_t	i;
 	char	type;
 	int		pn;	// how many Ps
 	int		en;	// how many EXITs
-	int		cn;	// how many COLLECTIBLEs
 	
-	if (!matrixmap[0])
+	mtrxmap = worldata->matrixmap;
+	if (!mtrxmap[0])
 		return (0);
-	lenx = ft_strlen(matrixmap[0]);
+	lenx = ft_strlen(mtrxmap[0]);
 	if (!lenx)
 		return (0);
 	pn = 0;
 	en = 0;
-	cn = 0;
 	j = 1;
-	while (matrixmap[j] != NULL)
+	while (mtrxmap[j] != NULL)
 	{
 		// Checks if rectangular
-		if (ft_strlen(matrixmap[j]) != lenx)
+		if (ft_strlen(mtrxmap[j]) != lenx)
 			return (0);
 		// Checks if sided by walls
-		if (matrixmap[j][0] != WALL || matrixmap[j][lenx-1] != WALL)
+		if (mtrxmap[j][0] != WALL || mtrxmap[j][lenx-1] != WALL)
 			return (0);
 		
 		i = 0;
-		type = matrixmap[j][i];
+		type = mtrxmap[j][i];
 		while (type != '\0')
 		{
 			if (type == PSTARTPOS)
@@ -92,18 +92,19 @@ int matrixmap_checkp(char **matrixmap)
 				en = 1;
 			}
 			else if (type == COLLECT)
-				cn++;
+
+				worldata->n_collectibles++;
 			
 			i++;
-			type = matrixmap[j][i];
+			type = mtrxmap[j][i];
 		}
 		j++;
 	}
 	// Checks if first and last row is all WALL
-	if (!ft_str_isallp(matrixmap[0], WALL) && !ft_str_isallp(matrixmap[j-1], WALL))
+	if (!ft_str_isallp(mtrxmap[0], WALL) && !ft_str_isallp(mtrxmap[j-1], WALL))
 		return (0);
 
-	if (!cn)
+	if (!worldata->n_collectibles)
 		return (0);	// Need at least 1 collectible
 
 	//TODO: Have to check if there is a valid path

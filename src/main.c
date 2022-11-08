@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/08 11:35:09 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/08 11:46:50 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	world_init(t_info *worldata)
 	worldata->pixels = 32;	
 	
 	worldata->win.tile_width = worldata->pixels * ft_strlen(worldata->matrixmap[0]);
-	worldata->win.tile_height = worldata->pixels * ft_strlen((char *)(worldata->matrixmap));
+	worldata->win.tile_height = worldata->pixels * ft_mtrxlen((void **)(worldata->matrixmap));
 	worldata->win.tile_ptr = mlx_new_window(worldata->mlx, worldata->win.tile_width, worldata->win.tile_height, "So Long");
 	
 	worldata->n_moves = 0;

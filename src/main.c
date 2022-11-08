@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/07 17:47:46 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/08 11:00:30 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	world_init(t_info *worldata)
 {
 	worldata->n_collectibles = 0;
 	worldata->n_collected = 0;
-	if (!mtrx_checkwallsp(worldata) && !mtrx_checkmp(worldata))
+	if (!mtrx_checkwallsp(worldata) || !mtrx_checkmp(worldata))
 	{
 		free(worldata->matrixmap);
 		ft_printf("Map wrong\n");
@@ -61,10 +61,10 @@ int	world_init(t_info *worldata)
 	// placeplayer_p(worldata);
 
 	worldata->mlx = mlx_init();
-	worldata->PIXELS = 32;	
+	worldata->pixels = 32;	
 	
-	worldata->win.tile_width = worldata->PIXELS * ft_strlen(*worldata->matrixmap);
-	worldata->win.tile_height = worldata->PIXELS * ft_strlen(*worldata->matrixmap);
+	worldata->win.tile_width = worldata->pixels * ft_strlen(worldata->matrixmap[0]);
+	worldata->win.tile_height = worldata->pixels * ft_strlen((char *)(worldata->matrixmap));
 	worldata->win.tile_ptr = mlx_new_window(worldata->mlx, worldata->win.tile_width, worldata->win.tile_height, "So Long");
 	
 	worldata->n_moves = 0;

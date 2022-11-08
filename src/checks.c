@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:23 by endarc            #+#    #+#             */
-/*   Updated: 2022/11/07 17:35:33 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/08 11:11:13 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static int	mtrx_checktiles(t_info *worldata, int *pnptr, int *enptr)
 	size_t	i;
 	
 	j = 1;
-	i = 0;
 	while (worldata->matrixmap[j] != NULL)
 	{
+		i = 0;
 		while (worldata->matrixmap[j][i] != '\0')
 		{
 			if (worldata->matrixmap[j][i] == COLLECT)
@@ -61,9 +61,10 @@ static int	mtrx_checktiles(t_info *worldata, int *pnptr, int *enptr)
 			{
 				worldata->ppos_x = i;
 				worldata->ppos_y = j;
+				worldata->matrixmap[j][i] = EMPTY;
 				(*pnptr)++;
 			}
-			if (worldata->matrixmap[j][i] != EMPTY && worldata->matrixmap[j][i] != WALL)
+			else if (worldata->matrixmap[j][i] != EMPTY && worldata->matrixmap[j][i] != WALL)
 				return (0);
 			i++;
 		}		

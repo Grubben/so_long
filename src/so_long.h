@@ -6,15 +6,18 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/07 17:47:02 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:44:11 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx-linux/mlx.h"
-#include "libft/libft.h"
-#include <fcntl.h>
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
-enum CONSTS
+# include "minilibx-linux/mlx.h"
+# include "libft/libft.h"
+# include <fcntl.h>
+
+enum e_CONSTS
 {
 	EMPTY = '0',
 	WALL = '1',
@@ -25,70 +28,71 @@ enum CONSTS
 
 typedef struct s_vec2
 {
-	int x;
-	int y;
-} t_vec2;
+	int	x;
+	int	y;
+}				t_vec2;
 
 typedef struct s_tile
 {
-	void *tile_ptr;
-	int tile_width;
-	int tile_height;
-} t_tile;
+	void	*tile_ptr;
+	int		tile_width;
+	int		tile_height;
+}				t_tile;
 
 typedef struct s_info
 {
-	void *mlx;
+	void			*mlx;
 
-	int PIXELS;
+	int				pixels;
 
-	// can use t_tile for win
-	t_tile win;
+	t_tile			win;
 
-	unsigned int ppos_x;
-	unsigned int ppos_y;
+	unsigned int	ppos_x;
+	unsigned int	ppos_y;
 
-	char **matrixmap;
+	char			**matrixmap;
 
-	t_tile player;
+	t_tile			player;
 
-	t_tile empspace;
-	t_tile wall;
+	t_tile			empspace;
+	t_tile			wall;
 
-	t_tile collectible;
-	size_t n_collectibles;
-	size_t n_collected;
+	t_tile			collectible;
+	size_t			n_collectibles;
+	size_t			n_collected;
 
-	t_tile mapexit;
+	t_tile			mapexit;
 
-	size_t n_moves;
-	int move_printb;
-	char *strmoves;
-} t_info;
+	size_t			n_moves;
+	int				move_printb;
+	char			*strmoves;
+}				t_info;
 
 /*  MAP */
-char **matrix_maker(char *filename);
+char	**matrix_maker(char *filename);
 
-void matrixmap_printer(char **matrixmap);
+void	matrixmap_printer(char **matrixmap);
 
 /*	CHECKS	*/
-int mtrx_checkwallsp(t_info *worldata);
+int		mtrx_checkwallsp(t_info *worldata);
 
-int	mtrx_checkmp(t_info *worldata);
+int		mtrx_checkmp(t_info *worldata);
 
 // int vldpath_checkerp(t_info *worldata);
 
 /*  MOVEMENT    */
-int move_player(int directionx, int directiony, size_t quant, t_info *worldata);
+int		move_player(int directx, int directy, size_t quant, t_info *worldata);
 
-int	keyboardPrinter(int keycode, t_info *worldata);
+int		keyboardPrinter(int keycode, t_info *worldata);
 
 /*  COLOR   */
-void intbin_append(int *color, unsigned char fam);
+void	intbin_append(int *color, unsigned char fam);
 
-int rgbToColor(unsigned char r, unsigned char g, unsigned char b);
+int		rgbToColor(unsigned char r, unsigned char g, unsigned char b);
 
-int draw_map(t_info *worldata);
+int		draw_map(t_info *worldata);
 
 /*	MAIN	*/
-int destroy(t_info *worldata);
+int		destroy(t_info *worldata);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:20:13 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/07 17:53:14 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/08 10:39:48 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int	chck_events(t_info *worldata)
 
 // Moves player in specified direction.
 // If cannot, returns 0 
-int move_player(int directionx, int directiony, size_t quant, t_info *worldata)
+int move_player(int directx, int directy, size_t quant, t_info *worldata)
 {
 	int    newx;
 	int    newy;
 	
-	newx = worldata->ppos_x + directionx * (long)quant;
-	newy = worldata->ppos_y - directiony * (long)quant;
+	newx = worldata->ppos_x + directx * (long)quant;
+	newy = worldata->ppos_y - directy * (long)quant;
 	//TODO: make these into asserts or take them out
 	if ((newx < 0) || (newy < 0))
 	    return (0);

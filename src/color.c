@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:40:09 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/07 11:11:26 by amc              ###   ########.fr       */
+/*   Updated: 2022/11/08 10:42:52 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int draw_map(t_info *worldata)
 		while (type != '\0')
 		{
 			if (type == EMPTY)
-				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->empspace.tile_ptr, i*worldata->PIXELS, j*worldata->PIXELS);
+				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->empspace.tile_ptr, i*worldata->pixels, j*worldata->pixels);
 			else if (type == WALL)
-				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->wall.tile_ptr, i*worldata->PIXELS, j*worldata->PIXELS);
+				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->wall.tile_ptr, i*worldata->pixels, j*worldata->pixels);
 			else if (type == COLLECT)
-				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->collectible.tile_ptr, i*worldata->PIXELS, j*worldata->PIXELS);
+				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->collectible.tile_ptr, i*worldata->pixels, j*worldata->pixels);
 			else if (type == EXIT)
-				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->mapexit.tile_ptr, i*worldata->PIXELS, j*worldata->PIXELS);
+				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->mapexit.tile_ptr, i*worldata->pixels, j*worldata->pixels);
 			i++;
 			type = worldata->matrixmap[j][i];
 		}
@@ -60,6 +60,6 @@ int draw_map(t_info *worldata)
 	}
 	if (worldata->move_printb)
 		mlx_string_put(worldata->mlx, worldata->win.tile_ptr, 450, 15, rgbToColor(0, 255, 255), worldata->strmoves);
-	mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->player.tile_ptr, worldata->ppos_x * worldata->PIXELS, worldata->ppos_y * worldata->PIXELS);
+	mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->player.tile_ptr, worldata->ppos_x * worldata->pixels, worldata->ppos_y * worldata->pixels);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/08 11:00:30 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/08 11:35:09 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int	main(int argc, char *argv[])
 		free(main.matrixmap);
 		return (0);
 	}
-	world_init(&main);
 	matrixmap_printer(main.matrixmap);
+	world_init(&main);
 
 	mlx_loop_hook(main.mlx, theloop, &main);
 	// Figuring out how hooks work.

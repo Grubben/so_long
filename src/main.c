@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/08 11:46:50 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/08 12:00:17 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	destroy(t_info *worldata)
 	
 	mlx_destroy_display(worldata->mlx);
 	exit(0);
+	return (0);
 }
 
 int	theloop(t_info *main)

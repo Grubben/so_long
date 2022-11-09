@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapfuncs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/07 17:35:19 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:33:27 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ void    matrixmap_printer(char **matrixmap)
 		ft_printf("%s\n", matrixmap[j]);
 		j++;
 	}
+	ft_printf("\n");
 }

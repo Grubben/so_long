@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/08 12:00:17 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/09 17:41:35 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ int	theloop(t_info *main)
 
 int	world_init(t_info *worldata)
 {
+	if (!vldpath_checkerp(worldata))
+	{
+		free(worldata->matrixmap);
+		ft_printf("No Valid Path\n");
+		return (0);
+	}
 	worldata->n_collectibles = 0;
 	worldata->n_collected = 0;
 	if (!mtrx_checkwallsp(worldata) || !mtrx_checkmp(worldata))
@@ -58,6 +64,7 @@ int	world_init(t_info *worldata)
 		ft_printf("Map wrong\n");
 		return (0);
 	}
+	
 
 	// placeplayer_p(worldata);
 

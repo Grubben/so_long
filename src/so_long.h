@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/08 10:44:11 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/09 13:46:52 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int		mtrx_checkwallsp(t_info *worldata);
 
 int		mtrx_checkmp(t_info *worldata);
 
-// int vldpath_checkerp(t_info *worldata);
+/*	PATH	*/
+int vldpath_checkerp(t_info *worldata);
 
 /*  MOVEMENT    */
 int		move_player(int directx, int directy, size_t quant, t_info *worldata);

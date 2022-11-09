@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/09 17:41:35 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:05:10 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,19 @@ int	theloop(t_info *main)
 
 int	world_init(t_info *worldata)
 {
-	if (!vldpath_checkerp(worldata))
-	{
-		free(worldata->matrixmap);
-		ft_printf("No Valid Path\n");
-		return (0);
-	}
 	worldata->n_collectibles = 0;
 	worldata->n_collected = 0;
 	if (!mtrx_checkwallsp(worldata) || !mtrx_checkmp(worldata))
 	{
 		free(worldata->matrixmap);
 		ft_printf("Map wrong\n");
+		return (0);
+	}
+	
+	if (!vldpath_checkerp(worldata))
+	{
+		free(worldata->matrixmap);
+		ft_printf("No Valid Path\n");
 		return (0);
 	}
 	

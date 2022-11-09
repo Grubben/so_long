@@ -79,88 +79,42 @@ char	**mtrxmap_cpy(char **matrixmap)
 	return (cpy);
 }
 
-int	chngaround_topstart(size_t x, size_t y, char **mtrxcpy)
+int     canmoveto(int x, int y, char **mtrxcpy)
 {
-	int	succesfulb;
-
-	succesfulb = 0;
-	if (mtrxcpy[y - 1][x] == EMPTY || mtrxcpy[y - 1][x] == COLLECT)
-	{
-		mtrxcpy[y - 1][x] = PSTARTPOS;
-		succesfulb = 1;
-	}
-
-	if (mtrxcpy[y][x + 1] == EMPTY || mtrxcpy[y][x + 1] == COLLECT)
-	{
-		mtrxcpy[y][x + 1] = PSTARTPOS;
-		succesfulb = 1;
-	}
-
-	if (mtrxcpy[y + 1][x] == EMPTY || mtrxcpy[y + 1][x] == COLLECT)
-	{
-		mtrxcpy[y + 1][x] = PSTARTPOS;
-		succesfulb = 1;
-	}
-
-	if (mtrxcpy[y][x - 1] == EMPTY || mtrxcpy[y][x - 1] == COLLECT)
-	{
-		mtrxcpy[y][x - 1] = PSTARTPOS;		
-		succesfulb = 1;
-	}
-	return (succesfulb);
-}
-
-int		mtrxpassall(char **mtrxcpy)
-{
-	int		go_again;
-	size_t	j;
-	size_t	i;
-
-	go_again = 1;
-	while (go_again)
-	{
-		go_again = 0;
-		j = 1;
-		while (mtrxcpy[j])
+        if (mtrxcpy[y][x] == EMPTY || mtrxcpy[y][x] == COLLECT)
 		{
-			i = 1;
-			while (mtrxcpy[j][i])
-			{
-				if (mtrxcpy[j][i] == PSTARTPOS)
-				{
-					if (chngaround_topstart(i, j, mtrxcpy))
-						go_again = 1;
-				}
-				i++;
-			}
-			j++;
+			mtrxcpy[y][x] = PSTARTPOS;
+			return (1);
 		}
-	}
-	return (1);
+        return (0);
 }
 
+void     mtrxpass(int x, int y, char **mtrxcpy)
+{
+        if (canmoveto(x, y - 1, mtrxcpy))
+			(mtrxpass(x, y - 1, mtrxcpy));
 
+        if (canmoveto(x + 1, y, mtrxcpy))
+			(mtrxpass(x + 1, y, mtrxcpy));
 
+        if (canmoveto(x, y + 1, mtrxcpy))
+			(mtrxpass(x, y + 1, mtrxcpy));
 
-
-
-
-
-
-
-
-
-
-
-
+        if (canmoveto(x - 1, y, mtrxcpy))
+			(mtrxpass(x - 1, y, mtrxcpy));
+}
+`
 int		vldpath_checkerp(t_info *worldata)
 {
-	// return (pthchk(worldata->ppos_x, worldata->ppos_y, worldata->matrixmap));
 	char	**mtrxcpy;
 
 	mtrxcpy = (char **)mtrxmap_cpy(worldata->matrixmap);
 	if (!mtrxcpy)
 		return (0);
-	mtrxpassall(mtrxcpy);
+
+	mtrxcpy[worldata->ppos_y][worldata->ppos_x] = PSTARTPOS;
+	mtrxpass(worldata->ppos_x, worldata->ppos_y, mtrxcpy);
+	//TODO: verify there is a P next to E
+	// and no C exists
 	return (1);
 }

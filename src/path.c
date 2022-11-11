@@ -12,31 +12,6 @@
 
 #include "so_long.h"
 
-int		pthchk(int x, int y, char **matrixmap)
-{
-	if (matrixmap[y][x] == EXIT)
-	{
-		return (1);
-	}
-	else if (matrixmap[y - 1][x] != WALL)
-	{
-		return (pthchk(x, y - 1, matrixmap));
-	}
-	else if (matrixmap[y][x + 1] != WALL)
-	{
-		return (pthchk(x + 1, y, matrixmap));
-	}
-	else if (matrixmap[y + 1][x] != WALL)
-	{
-		return (pthchk(x, y + 1, matrixmap));
-	}
-	else if (matrixmap[y][x - 1] != WALL)
-	{
-		return (pthchk(x - 1, y + 1, matrixmap));
-	}
-	return (0);
-}
-
 void	**ft_mtrxcpy(void **mtrx)
 {
 	void	**cpy;
@@ -103,10 +78,26 @@ void     mtrxpass(int x, int y, char **mtrxcpy)
         if (canmoveto(x - 1, y, mtrxcpy))
 			(mtrxpass(x - 1, y, mtrxcpy));
 }
-`
+
+int	chck_around(size_t x, size_t y, char **mtrxcpy)
+{
+	if (mtrxcpy[y - 1][x] == PSTARTPOS)
+		return (1);
+	if (mtrxcpy[y][x + 1] == PSTARTPOS)
+		return (1);
+	if (mtrxcpy[y + 1][x] == PSTARTPOS)
+		return (1);
+	if (mtrxcpy[y + 1][x - 1] == PSTARTPOS)
+		return (1);
+	return (0);
+}
+
 int		vldpath_checkerp(t_info *worldata)
 {
 	char	**mtrxcpy;
+	char	type;
+	size_t	j;
+	size_t	i;
 
 	mtrxcpy = (char **)mtrxmap_cpy(worldata->matrixmap);
 	if (!mtrxcpy)
@@ -114,7 +105,31 @@ int		vldpath_checkerp(t_info *worldata)
 
 	mtrxcpy[worldata->ppos_y][worldata->ppos_x] = PSTARTPOS;
 	mtrxpass(worldata->ppos_x, worldata->ppos_y, mtrxcpy);
+
 	//TODO: verify there is a P next to E
+	j = 1;
+	while (mtrxcpy[j] != NULL)
+	{
+		i = 1;
+		while (mtrxcpy[j][i] != '\0')
+		{
+			type = mtrxcpy[j][i];
+			if (type == COLLECT)
+			{
+				ft_printf("Collectible at %d_%d coord is not accessible", i, j);
+				return (0);
+			}
+			if (type == EXIT)
+			{
+				return (chck_around(i, j, mtrxcpy));
+			}
+			i++;
+		}
+		j++;
+	}
+	// if we get here, means no exit was found. Shouldn't happen
+	return (0);
+	
 	// and no C exists
 	return (1);
 }

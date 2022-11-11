@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/09 13:46:52 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:42:10 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_info
 char	**matrix_maker(char *filename);
 
 void	matrixmap_printer(char **matrixmap);
+
+void	mtrx_free(char **mtrxmap);
 
 /*	CHECKS	*/
 int		mtrx_checkwallsp(t_info *worldata);

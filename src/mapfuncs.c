@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapfuncs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/09 18:48:29 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:24:26 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ char    **matrix_maker(char *filename)
 	fd = open(filename, O_RDONLY);
 
 	matrix = aux(fd, NULL, 0);
+	close(fd);
 	return (matrix);
-	
 }
+
 
 void    matrixmap_printer(char **matrixmap)
 {
@@ -57,4 +58,19 @@ void    matrixmap_printer(char **matrixmap)
 		j++;
 	}
 	ft_printf("\n");
+}
+
+/* Frees rows and then column
+*/
+void	mtrx_free(char **mtrxmap)
+{
+	size_t	i;
+	
+	i = 0;
+	while (mtrxmap[i] != NULL)
+	{
+		free(mtrxmap[i]);
+		i++;
+	}
+	free(mtrxmap);
 }

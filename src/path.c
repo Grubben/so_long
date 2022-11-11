@@ -38,13 +38,13 @@ char	**mtrxmap_cpy(char **matrixmap)
 	size_t	i;
 
 	len = ft_mtrxlen((void **)matrixmap);
-	cpy = malloc(len * (sizeof(void *) + 1));
+	cpy = malloc((len + 1) * (sizeof(void *)));
 	if (!cpy && matrixmap == NULL)
 		return (NULL);
 	i = 0;
 	while (i < len)
 	{
-		cpy[i] = malloc(ft_strlen(matrixmap[i]) * (sizeof(char) + 1));
+		cpy[i] = malloc((ft_strlen(matrixmap[i]) + 1) * sizeof(char));
 		if (!cpy[i])
 			return (NULL);
 		ft_memcpy(cpy[i], matrixmap[i], ft_strlen(matrixmap[i]) + 1);
@@ -99,7 +99,7 @@ int		vldpath_checkerp(t_info *worldata)
 	size_t	j;
 	size_t	i;
 
-	mtrxcpy = (char **)mtrxmap_cpy(worldata->matrixmap);
+	mtrxcpy = mtrxmap_cpy(worldata->matrixmap);
 	if (!mtrxcpy)
 		return (0);
 
@@ -116,11 +116,14 @@ int		vldpath_checkerp(t_info *worldata)
 			type = mtrxcpy[j][i];
 			if (type == COLLECT)
 			{
-				ft_printf("Collectible at %d_%d coord is not accessible", i, j);
+				ft_printf("Collectible at %d_%d coord is not accessible\n", i, j);
+				mtrx_free(mtrxcpy);
 				return (0);
 			}
 			if (type == EXIT)
 			{
+				mtrx_free(mtrxcpy);
+				ft_printf("Cannot access the Exit\n");
 				return (chck_around(i, j, mtrxcpy));
 			}
 			i++;
@@ -128,6 +131,7 @@ int		vldpath_checkerp(t_info *worldata)
 		j++;
 	}
 	// if we get here, means no exit was found. Shouldn't happen
+	mtrx_free(mtrxcpy);
 	return (0);
 	
 	// and no C exists

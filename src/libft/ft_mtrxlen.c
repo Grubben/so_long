@@ -6,13 +6,13 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:31:07 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/08 11:40:05 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/11 20:47:25 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* Gives len of matrix -> array of array
+/* Gives len of matrix :: array of array
 */
 size_t	ft_mtrxlen(void **m)
 {

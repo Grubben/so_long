@@ -122,18 +122,17 @@ int		vldpath_checkerp(t_info *worldata)
 			}
 			if (type == EXIT)
 			{
-				mtrx_free(mtrxcpy);
-				ft_printf("Cannot access the Exit\n");
-				return (chck_around(i, j, mtrxcpy));
+				if (!chck_around(i, j, mtrxcpy))
+				{
+					mtrx_free(mtrxcpy);
+					ft_printf("Cannot access the Exit\n");
+					return (0);
+				}
 			}
 			i++;
 		}
 		j++;
 	}
-	// if we get here, means no exit was found. Shouldn't happen
 	mtrx_free(mtrxcpy);
-	return (0);
-	
-	// and no C exists
 	return (1);
 }

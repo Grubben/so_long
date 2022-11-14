@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:23 by endarc            #+#    #+#             */
-/*   Updated: 2022/11/14 12:00:23 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:54:19 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int mtrx_checkwallsp(char **mtrxmap)
 		j++;
 	}
 	// Checks if first and last row is all WALL
-	if (!ft_str_isallp(mtrxmap[0], WALL) && !ft_str_isallp(mtrxmap[j-1], WALL))
+	if (!ft_str_isallp(mtrxmap[0], WALL) || !ft_str_isallp(mtrxmap[j-1], WALL))
 		return (0);
 	return (1);
 }

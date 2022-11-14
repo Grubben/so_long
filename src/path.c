@@ -56,12 +56,17 @@ char	**mtrxmap_cpy(char **matrixmap)
 
 int     canmoveto(int x, int y, char **mtrxcpy)
 {
-        if (mtrxcpy[y][x] == EMPTY || mtrxcpy[y][x] == COLLECT)
-		{
-			mtrxcpy[y][x] = PSTARTPOS;
-			return (1);
-		}
-        return (0);
+	// I added this to fix a mistake.
+	// But this should never give a mistake bcs the map
+	//    should hv been checked well before getting here
+	// if (x < 0 || y < 0)
+	// 	return (0);
+	if (mtrxcpy[y][x] == EMPTY || mtrxcpy[y][x] == COLLECT)
+	{
+		mtrxcpy[y][x] = PSTARTPOS;
+		return (1);
+	}
+	return (0);
 }
 
 void     mtrxpass(int x, int y, char **mtrxcpy)

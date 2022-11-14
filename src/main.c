@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/11 21:29:24 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/14 11:48:32 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,10 @@ int main(int argc, char *argv[])
 		main.matrixmap = matrix_maker(argv[1]);
 	else
 		return (0);
-	if (!(*main.matrixmap))
+	if (!(main.matrixmap[0]))
 	{
 		free(main.matrixmap);
+		ft_printf("Nothing inside %s\n", argv[1]);
 		return (0);
 	}
 

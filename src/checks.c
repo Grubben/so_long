@@ -6,20 +6,19 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:23 by endarc            #+#    #+#             */
-/*   Updated: 2022/11/08 11:11:13 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:00:23 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // Checks wether map is rectangular and closed by walls
-int mtrx_checkwallsp(t_info *worldata)
+int mtrx_checkwallsp(char **mtrxmap)
 {
-	char	**mtrxmap;
 	size_t	lenx;
 	size_t  j;
 	
-	mtrxmap = worldata->matrixmap;
+	// Not necessary. Already checked in main:100
 	if (!mtrxmap[0])
 		return (0);
 	lenx = ft_strlen(mtrxmap[0]);
@@ -48,6 +47,7 @@ static int	mtrx_checktiles(t_info *worldata, int *pnptr, int *enptr)
 	size_t	i;
 	
 	j = 1;
+	//TODO: I'm checking int the last row, which has already been checked to be all WALL
 	while (worldata->matrixmap[j] != NULL)
 	{
 		i = 0;

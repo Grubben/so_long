@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/11 20:42:10 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:09:19 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_tile
 	int		tile_height;
 }				t_tile;
 
+// Could make another struct for level_init
+// To separate it from the window construction and mlx initing
 typedef struct s_info
 {
 	void			*mlx;
@@ -76,7 +78,7 @@ void	matrixmap_printer(char **matrixmap);
 void	mtrx_free(char **mtrxmap);
 
 /*	CHECKS	*/
-int		mtrx_checkwallsp(t_info *worldata);
+int		mtrx_checkwallsp(char **mtrxmap);
 
 int		mtrx_checkmp(t_info *worldata);
 

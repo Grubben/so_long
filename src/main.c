@@ -6,7 +6,7 @@
 /*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/14 11:48:32 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/14 12:25:37 by endarc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int world_init(t_info *worldata)
 {
 	worldata->n_collectibles = 0;
 	worldata->n_collected = 0;
-	if (!mtrx_checkwallsp(worldata) || !mtrx_checkmp(worldata))
+	if (!mtrx_checkwallsp(worldata->matrixmap) || !mtrx_checkmp(worldata))
 	{
 		// free(worldata->matrixmap);
 		ft_printf("Map wrong\n");
@@ -74,18 +74,19 @@ int world_init(t_info *worldata)
 	worldata->win.tile_height = worldata->pixels * ft_mtrxlen((void **)(worldata->matrixmap));
 	worldata->win.tile_ptr = mlx_new_window(worldata->mlx, worldata->win.tile_width, worldata->win.tile_height, "So Long");
 
-	worldata->n_moves = 0;
-	worldata->move_printb = 0;
-	if (worldata->move_printb)
-		worldata->strmoves = ft_itoa(0);
-
 	worldata->player.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "player_sprites/hero1_32betterback.xpm", &worldata->player.tile_width, &worldata->player.tile_height);
 
-	worldata->empspace.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/empty32.xpm", &worldata->empspace.tile_width, &worldata->empspace.tile_width);
-	worldata->wall.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/wall32.xpm", &worldata->wall.tile_width, &worldata->wall.tile_width);
-	worldata->collectible.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/collectible32.xpm", &worldata->collectible.tile_width, &worldata->collectible.tile_width);
-	worldata->mapexit.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/exit32.xpm", &worldata->mapexit.tile_width, &worldata->mapexit.tile_width);
-	worldata->n_collected = 0;
+	worldata->empspace.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/empty32.xpm", &worldata->empspace.tile_width, &worldata->empspace.tile_height);
+	worldata->wall.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/wall32.xpm", &worldata->wall.tile_width, &worldata->wall.tile_height);
+	worldata->collectible.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/collectible32.xpm", &worldata->collectible.tile_width, &worldata->collectible.tile_height);
+	worldata->mapexit.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/exit32.xpm", &worldata->mapexit.tile_width, &worldata->mapexit.tile_height);
+
+
+	worldata->n_moves = 0;
+	worldata->strmoves = NULL;
+	worldata->move_printb = 0;	
+	if (worldata->move_printb)
+		worldata->strmoves = ft_itoa(0);
 	return (1);
 }
 

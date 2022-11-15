@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:20:13 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/15 14:20:37 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:59:15 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int move_player(int directx, int directy, size_t quant, t_info *worldata)
 	worldata->n_moves++;
 	if (worldata->move_printb)
 	{
-		free(worldata->strmoves);
-		worldata->strmoves = ft_itoa(worldata->n_moves);
-		if (!worldata->strmoves)
+		free(worldata->smvs);
+		worldata->smvs = ft_itoa(worldata->n_moves);
+		if (!worldata->smvs)
 			return (0); //TODO: leave in a better fashion		
 	}
 	else

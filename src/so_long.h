@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/14 12:09:19 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/15 16:06:44 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ typedef struct s_vec2
 	int	y;
 }				t_vec2;
 
-typedef struct s_tile
+typedef struct s_img
 {
-	void	*tile_ptr;
-	int		tile_width;
-	int		tile_height;
-}				t_tile;
+	void	*ptr;
+	int		width;
+	int		height;
+}				t_img;
 
 // Could make another struct for level_init
 // To separate it from the window construction and mlx initing
@@ -47,27 +47,27 @@ typedef struct s_info
 
 	int				pixels;
 
-	t_tile			win;
+	t_img			win;
 
 	unsigned int	ppos_x;
 	unsigned int	ppos_y;
 
 	char			**matrixmap;
 
-	t_tile			player;
+	t_img			imgplyr;
 
-	t_tile			empspace;
-	t_tile			wall;
+	t_img			imgempty;
+	t_img			imgwall;
 
-	t_tile			collectible;
+	t_img			imgcoll;
 	size_t			n_collectibles;
 	size_t			n_collected;
 
-	t_tile			mapexit;
+	t_img			imgexit;
 
 	size_t			n_moves;
 	int				move_printb;
-	char			*strmoves;
+	char			*smvs;
 }				t_info;
 
 /*  MAP */
@@ -91,9 +91,7 @@ int		move_player(int directx, int directy, size_t quant, t_info *worldata);
 int		keyboardPrinter(int keycode, t_info *worldata);
 
 /*  COLOR   */
-void	intbin_append(int *color, unsigned char fam);
-
-int		rgbToColor(unsigned char r, unsigned char g, unsigned char b);
+int		rgbtocolor(unsigned char r, unsigned char g, unsigned char b);
 
 int		draw_map(t_info *worldata);
 

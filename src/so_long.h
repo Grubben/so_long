@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/15 16:06:44 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:09:23 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int vldpath_checkerp(t_info *worldata);
 /*  MOVEMENT    */
 int		move_player(int directx, int directy, size_t quant, t_info *worldata);
 
-int		keyboardPrinter(int keycode, t_info *worldata);
+int		keyboardprinter(int keycode, t_info *worldata);
 
 /*  COLOR   */
 int		rgbtocolor(unsigned char r, unsigned char g, unsigned char b);

@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/15 15:41:53 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:09:23 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	main(int argc, char *argv[])
 		return (0);
 	}
 	mlx_loop_hook(main.mlx, theloop, &main);
-	mlx_hook(main.win.ptr, 02, 1L << 0, keyboardPrinter, &main);
+	mlx_hook(main.win.ptr, 02, 1L << 0, keyboardprinter, &main);
 	mlx_hook(main.win.ptr, 17, 0L, destroy, &main);
 	mlx_loop(main.mlx);
 	return (0);

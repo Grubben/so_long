@@ -54,14 +54,14 @@ int world_init(t_info *worldata)
 	if (!mtrx_checkwallsp(worldata->matrixmap) || !mtrx_checkmp(worldata))
 	{
 		// free(worldata->matrixmap);
-		ft_printf("Map wrong\n");
+		ft_printf("Error\nMap wrong\n");
 		return (0);
 	}
 
 	if (!vldpath_checkerp(worldata))
 	{
 		// free(worldata->matrixmap);
-		ft_printf("No Valid Path\n");
+		ft_printf("Error\nNo Valid Path\n");
 		return (0);
 	}
 

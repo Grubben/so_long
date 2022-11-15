@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:40:09 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/08 10:42:52 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:45:51 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	intbin_append(int *color, unsigned char fam)
+static void	intbin_append(int *color, unsigned char fam)
 {
 	*color = *color << 8;
 	*color = *color | fam;
@@ -31,35 +31,45 @@ int	rgbToColor(unsigned char r, unsigned char g, unsigned char b)
 
 }
 
-int draw_map(t_info *worldata)
+static void	imgtowin(t_info *worldata, t_img *imgp, int i, int j)
+{
+	mlx_put_image_to_window(worldata->mlx, worldata->win.ptr, imgp->ptr, i * worldata->pixels, j * worldata->pixels);
+}
+
+int draw_map(t_info *wrldt)
 {
 	size_t  j;
 	size_t  i;
 	char    type;
 
-	mlx_clear_window(worldata->mlx, worldata->win.tile_ptr);
+	mlx_clear_window(wrldt->mlx, wrldt->win.ptr);
 	j = 0;
-	while (worldata->matrixmap[j] != NULL)
+	while (wrldt->matrixmap[j] != NULL)
 	{
 		i = 0;
-		type = worldata->matrixmap[j][i];
+		type = wrldt->matrixmap[j][i];
 		while (type != '\0')
 		{
 			if (type == EMPTY)
-				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->empspace.tile_ptr, i*worldata->pixels, j*worldata->pixels);
+				imgtowin(wrldt, &wrldt->imgempty, i, j);
+				// mlx_put_image_to_window(wrldt->mlx, wrldt->win.ptr,wrldt->imgempty.ptr, i*wrldt->pixels, j*wrldt->pixels);
 			else if (type == WALL)
-				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->wall.tile_ptr, i*worldata->pixels, j*worldata->pixels);
+				imgtowin(wrldt, &wrldt->imgwall, i, j);
+				// mlx_put_image_to_window(wrldt->mlx, wrldt->win.ptr, wrldt->imgwall.ptr, i*wrldt->pixels, j*wrldt->pixels);
 			else if (type == COLLECT)
-				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->collectible.tile_ptr, i*worldata->pixels, j*worldata->pixels);
+				imgtowin(wrldt, &wrldt->imgcoll, i, j);
+				// mlx_put_image_to_window(wrldt->mlx, wrldt->win.ptr, wrldt->imgcoll.ptr, i*wrldt->pixels, j*wrldt->pixels);
 			else if (type == EXIT)
-				mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->mapexit.tile_ptr, i*worldata->pixels, j*worldata->pixels);
+				imgtowin(wrldt, &wrldt->imgexit, i, j);
+				// mlx_put_image_to_window(wrldt->mlx, wrldt->win.ptr, wrldt->imgexit.ptr, i*wrldt->pixels, j*wrldt->pixels);
 			i++;
-			type = worldata->matrixmap[j][i];
+			type = wrldt->matrixmap[j][i];
 		}
 		j++;
 	}
-	if (worldata->move_printb)
-		mlx_string_put(worldata->mlx, worldata->win.tile_ptr, 450, 15, rgbToColor(0, 255, 255), worldata->strmoves);
-	mlx_put_image_to_window(worldata->mlx, worldata->win.tile_ptr, worldata->player.tile_ptr, worldata->ppos_x * worldata->pixels, worldata->ppos_y * worldata->pixels);
+	if (wrldt->move_printb)
+		mlx_string_put(wrldt->mlx, wrldt->win.ptr, 450, 15, rgbToColor(0, 255, 255), wrldt->smvs);
+	mlx_put_image_to_window(wrldt->mlx, wrldt->win.ptr, wrldt->imgplyr.ptr,
+		wrldt->ppos_x * wrldt->pixels, wrldt->ppos_y * wrldt->pixels);
 	return (1);
 }

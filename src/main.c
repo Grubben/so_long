@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/14 12:25:37 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/15 15:14:49 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,52 +47,48 @@ int theloop(t_info *main)
 	// draw_map(main);
 }
 
-int world_init(t_info *worldata)
+void	img_init(void *mlx, t_img *fill, char *sprite)
 {
-	worldata->n_collectibles = 0;
-	worldata->n_collected = 0;
-	if (!mtrx_checkwallsp(worldata->matrixmap) || !mtrx_checkmp(worldata))
-	{
-		// free(worldata->matrixmap);
-		ft_printf("Error\nMap wrong\n");
-		return (0);
-	}
+	fill->ptr = mlx_xpm_file_to_image(mlx, sprite, &fill->width, &fill->height);
+}
 
-	if (!vldpath_checkerp(worldata))
-	{
-		// free(worldata->matrixmap);
-		ft_printf("Error\nNo Valid Path\n");
-		return (0);
-	}
-
-	// placeplayer_p(worldata);
-
-	worldata->mlx = mlx_init();
-	worldata->pixels = 32;
-
-	worldata->win.tile_width = worldata->pixels * ft_strlen(worldata->matrixmap[0]);
-	worldata->win.tile_height = worldata->pixels * ft_mtrxlen((void **)(worldata->matrixmap));
-	worldata->win.tile_ptr = mlx_new_window(worldata->mlx, worldata->win.tile_width, worldata->win.tile_height, "So Long");
-
-	worldata->player.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "player_sprites/hero1_32betterback.xpm", &worldata->player.tile_width, &worldata->player.tile_height);
-
-	worldata->empspace.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/empty32.xpm", &worldata->empspace.tile_width, &worldata->empspace.tile_height);
-	worldata->wall.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/wall32.xpm", &worldata->wall.tile_width, &worldata->wall.tile_height);
-	worldata->collectible.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/collectible32.xpm", &worldata->collectible.tile_width, &worldata->collectible.tile_height);
-	worldata->mapexit.tile_ptr = mlx_xpm_file_to_image(worldata->mlx, "world_sprites/exit32.xpm", &worldata->mapexit.tile_width, &worldata->mapexit.tile_height);
-
-
-	worldata->n_moves = 0;
-	worldata->strmoves = NULL;
-	worldata->move_printb = 0;	
-	if (worldata->move_printb)
-		worldata->strmoves = ft_itoa(0);
+int world_init(t_info *wrldt)
+{
+	wrldt->n_collectibles = 0;
+	wrldt->n_collected = 0;
+	if (!mtrx_checkwallsp(wrldt->matrixmap) || !mtrx_checkmp(wrldt))
+		return (ft_printf("Error\nMap wrong\n") && 0);
+	if (!vldpath_checkerp(wrldt))
+		return (ft_printf("Error\nNo Valid Path\n") && 0);
+	wrldt->mlx = mlx_init();
+	wrldt->pixels = 32;
+	wrldt->win.width = wrldt->pixels * ft_strlen(wrldt->matrixmap[0]);
+	wrldt->win.height = wrldt->pixels * ft_mtrxlen((void **)(wrldt->matrixmap));
+	
+	wrldt->win.ptr = mlx_new_window(wrldt->mlx, wrldt->win.width, wrldt->win.height, "SoLong");
+	
+	img_init(wrldt->mlx, &wrldt->imgplyr, "player_sprites/hero1_32betterback.xpm");
+	// wrldt->imgplyr.ptr = mlx_xpm_file_to_image(wrldt->mlx, "player_sprites/hero1_32betterback.xpm", &wrldt->imgplyr.width, &wrldt->imgplyr.height);
+	img_init(wrldt->mlx, &wrldt->imgempty, "wrldSprts/empty.xpm");
+	// wrldt->imgempty.ptr = mlx_xpm_file_to_image(wrldt->mlx, "wrldSprts/empty.xpm", &wrldt->imgempty.width, &wrldt->imgempty.height);
+	img_init(wrldt->mlx, &wrldt->imgwall, "wrldSprts/wall.xpm");
+	// wrldt->imgwall.ptr = mlx_xpm_file_to_image(wrldt->mlx, "wrldSprts/wall.xpm", &wrldt->imgwall.width, &wrldt->imgwall.height);
+	img_init(wrldt->mlx, &wrldt->imgcoll, "wrldSprts/coll.xpm");
+	// wrldt->imgcoll.ptr = mlx_xpm_file_to_image(wrldt->mlx, "wrldSprts/coll.xpm", &wrldt->imgcoll.width, &wrldt->imgcoll.height);
+	img_init(wrldt->mlx, &wrldt->imgexit, "wrldSprts/exit.xpm");
+	// wrldt->imgexit.ptr = mlx_xpm_file_to_image(wrldt->mlx, "wrldSprts/exit.xpm", &wrldt->imgexit.width, &wrldt->imgexit.height);
+			
+	wrldt->n_moves = 0;
+	wrldt->strmoves = NULL;
+	wrldt->move_printb = 0;
+	if (wrldt->move_printb)
+		wrldt->strmoves = ft_itoa(0);
 	return (1);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_info main;
+	t_info	main;
 
 	if (argc > 1)
 		main.matrixmap = matrix_maker(argv[1]);

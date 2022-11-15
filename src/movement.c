@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 18:20:13 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/08 10:39:48 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:20:37 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int move_player(int directx, int directy, size_t quant, t_info *worldata)
 		if (!worldata->strmoves)
 			return (0); //TODO: leave in a better fashion		
 	}
+	else
+		ft_printf("%d\n", worldata->n_moves);
 	chck_events(worldata);
 	return (1);
 }

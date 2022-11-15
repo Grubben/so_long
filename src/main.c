@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/15 15:22:31 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:41:53 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	destroy(t_info *worldata)
 {
-	mlx_destroy_window(worldata->mlx, worldata->win.tile_ptr);
-	mlx_destroy_image(worldata->mlx, worldata->player.tile_ptr);
-	mlx_destroy_image(worldata->mlx, worldata->empspace.tile_ptr);
-	mlx_destroy_image(worldata->mlx, worldata->wall.tile_ptr);
-	mlx_destroy_image(worldata->mlx, worldata->collectible.tile_ptr);
-	mlx_destroy_image(worldata->mlx, worldata->mapexit.tile_ptr);
+	mlx_destroy_window(worldata->mlx, worldata->win.ptr);
+	mlx_destroy_image(worldata->mlx, worldata->imgplyr.ptr);
+	mlx_destroy_image(worldata->mlx, worldata->imgempty.ptr);
+	mlx_destroy_image(worldata->mlx, worldata->imgwall.ptr);
+	mlx_destroy_image(worldata->mlx, worldata->imgcoll.ptr);
+	mlx_destroy_image(worldata->mlx, worldata->imgexit.ptr);
 	if (worldata->move_printb)
-		free(worldata->strmoves);
+		free(worldata->smvs);
 	mlx_destroy_display(worldata->mlx);
 	exit(0);
 	return (0);
@@ -40,7 +40,7 @@ int	theloop(t_info *main)
 	return (frame);
 }
 
-void	img_init(void *mlx, t_img *fill, char *sprite)
+static void	img_init(void *mlx, t_img *fill, char *sprite)
 {
 	fill->ptr = mlx_xpm_file_to_image(mlx, sprite, &fill->width, &fill->height);
 }
@@ -66,10 +66,10 @@ int	world_init(t_info *wrldt)
 	img_init(wrldt->mlx, &wrldt->imgcoll, "wrldSprts/coll.xpm");
 	img_init(wrldt->mlx, &wrldt->imgexit, "wrldSprts/exit.xpm");
 	wrldt->n_moves = 0;
-	wrldt->strmoves = NULL;
+	wrldt->smvs = NULL;
 	wrldt->move_printb = 0;
 	if (wrldt->move_printb)
-		wrldt->strmoves = ft_itoa(0);
+		wrldt->smvs = ft_itoa(0);
 	return (1);
 }
 
@@ -94,8 +94,8 @@ int	main(int argc, char *argv[])
 		return (0);
 	}
 	mlx_loop_hook(main.mlx, theloop, &main);
-	mlx_hook(main.win.tile_ptr, 02, 1L << 0, keyboardPrinter, &main);
-	mlx_hook(main.win.tile_ptr, 17, 0L, destroy, &main);
+	mlx_hook(main.win.ptr, 02, 1L << 0, keyboardPrinter, &main);
+	mlx_hook(main.win.ptr, 17, 0L, destroy, &main);
 	mlx_loop(main.mlx);
 	return (0);
 }

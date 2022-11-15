@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/15 17:09:23 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:25:55 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,8 @@ int		draw_map(t_info *worldata);
 
 /*	MAIN	*/
 int		destroy(t_info *worldata);
+
+/*	UTILS	*/
+int	func_charmtrxdo(char **mtrx, void *data, int (*func)(char, void *, size_t, size_t));
 
 #endif

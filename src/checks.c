@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:23 by endarc            #+#    #+#             */
-/*   Updated: 2022/11/14 12:54:19 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/15 18:26:37 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,50 +41,70 @@ int mtrx_checkwallsp(char **mtrxmap)
 	return (1);
 }
 
-static int	mtrx_checktiles(t_info *worldata, int *pnptr, int *enptr)
+
+int	checkconsts(char c, void *hiddendata, size_t i, size_t j)
 {
-	size_t	j;
-	size_t	i;
+	int	**data;
+
+	data = hiddendata;
 	
-	j = 1;
-	//TODO: I'm checking int the last row, which has already been checked to be all WALL
-	while (worldata->matrixmap[j] != NULL)
+	(void)i;
+	(void)j;
+	if (c == EXIT)
+		(*(data[1]))++;
+	else if (c == PSTARTPOS)
 	{
-		i = 0;
-		while (worldata->matrixmap[j][i] != '\0')
-		{
-			if (worldata->matrixmap[j][i] == COLLECT)
-				worldata->n_collectibles++;
-			else if (worldata->matrixmap[j][i] == EXIT)
-				(*enptr)++;
-			else if (worldata->matrixmap[j][i] == PSTARTPOS)
-			{
-				worldata->ppos_x = i;
-				worldata->ppos_y = j;
-				worldata->matrixmap[j][i] = EMPTY;
-				(*pnptr)++;
-			}
-			else if (worldata->matrixmap[j][i] != EMPTY && worldata->matrixmap[j][i] != WALL)
-				return (0);
-			i++;
-		}		
-		j++;
+		(*(data[0]))++;
 	}
 	return (1);
 }
 
+int	checkstartpos(char c, void *hiddendata, size_t i, size_t j)
+{
+	t_info	*data;
+
+	data = hiddendata;
+	
+	if (c == COLLECT)
+	{
+		data->n_collectibles++;
+		return (1);
+	}
+	if (c == PSTARTPOS)
+	{
+		data->ppos_x = i;
+		data->ppos_y = j;
+		data->matrixmap[j][i] = EMPTY;
+		return (1);
+	}
+	// if c is not one of the consts map is broken
+	else if (c == EMPTY || c == WALL || c == EXIT)
+		return (1);
+	return (0);
+}
+
 int	mtrx_checkmp(t_info *worldata)
 {
-	int		pn;	// how many Ps
-	int		en;	// how many EXITs
-	
+	int	pn;
+	int	en;
+	int *parr[2];
+
 	pn = 0;
 	en = 0;
-	if (!mtrx_checktiles(worldata, &pn, &en))
+
+	parr[0] = &pn;
+	parr[1] = &en;
+
+	if (!func_charmtrxdo(worldata->matrixmap, &parr, checkconsts))
 		return (0);
+	// if (!mtrx_checktiles(worldata, &pn, &en))
+	if (!func_charmtrxdo(worldata->matrixmap, worldata, checkstartpos))	
+		return (0);
+
 	if (!worldata->n_collectibles)
-		return (0);	// Need at least 1 collectible
-	if (en != 1 || pn != 1)	// Only 1 exit and startpos
+		return (0);
+	if (en != 1 || pn != 1)
 		return (0);
 	return (1);
+
 }

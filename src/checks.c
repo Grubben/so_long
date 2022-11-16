@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:23 by endarc            #+#    #+#             */
-/*   Updated: 2022/11/16 15:38:30 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:40:44 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ int	mtrx_checkmp(t_info *worldata)
 	en = 0;
 	parr[0] = &pn;
 	parr[1] = &en;
-	if (!func_charmtrxdo(worldata->matrixmap, &parr, checkconsts))
+	if (!mtrxdo(worldata->matrixmap, &parr, checkconsts))
 		return (0);
-	if (!func_charmtrxdo(worldata->matrixmap, worldata, checkstartpos))
+	if (!mtrxdo(worldata->matrixmap, worldata, checkstartpos))
 		return (0);
 	if (!worldata->n_collectibles)
 		return (0);

@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   mapfuncs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: endarc <endarc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/11 21:24:26 by endarc           ###   ########.fr       */
+/*   Updated: 2022/11/16 15:43:54 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // Ezequiel
-static char    **aux(int fd, char **map, size_t count)
+static char	**aux(int fd, char **map, size_t count)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(fd);
-
 	if (line)
 	{
-		line[ft_strlen(line)-1] = '\0';	// removes '\n'
-		map = aux(fd, map, count+1);
+		line[ft_strlen(line) - 1] = '\0';
+		map = aux(fd, map, count +1);
 	}
 	else
 	{
@@ -34,22 +33,20 @@ static char    **aux(int fd, char **map, size_t count)
 	return (map);
 }
 
-char    **matrix_maker(char *filename)
+char	**matrix_maker(char *filename)
 {
-	int     fd;
-	char    **matrix;
+	int		fd;
+	char	**matrix;
 
 	fd = open(filename, O_RDONLY);
-
 	matrix = aux(fd, NULL, 0);
 	close(fd);
 	return (matrix);
 }
 
-
-void    matrixmap_printer(char **matrixmap)
+void	matrixmap_printer(char **matrixmap)
 {
-	size_t  j;
+	size_t	j;
 
 	j = 0;
 	while (matrixmap[j] != NULL)
@@ -65,7 +62,7 @@ void    matrixmap_printer(char **matrixmap)
 void	mtrx_free(char **mtrxmap)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (mtrxmap[i] != NULL)
 	{

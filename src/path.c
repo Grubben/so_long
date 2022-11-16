@@ -1,17 +1,18 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:14:18 by amc               #+#    #+#             */
-/*   Updated: 2022/11/07 11:35:27 by amc              ###   ########.fr       */
+/*   Created: 2022/11/16 17:01:13 by amaria-d          #+#    #+#             */
+/*   Updated: 2022/11/16 17:03:38 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
 void	**ft_mtrxcpy(void **mtrx)
 {
 	void	**cpy;
@@ -25,42 +26,21 @@ void	**ft_mtrxcpy(void **mtrx)
 	i = 0;
 	while (i < len + 1)
 	{
-		cpy[i] = NULL;	// change NULL value to mtrx[i] for semi-shallow copy
+		cpy[i] = NULL; // change NULL value to mtrx[i] for semi-shallow copy
 		i++;
 	}
 	return (cpy);
 }
+*/
 
-char	**mtrxmap_cpy(char **matrixmap)
+/* I added this to fix a mistake.
+ * But this should never give a mistake bcs the map
+ * should hv been checked well before getting here
+ * if (x < 0 || y < 0)
+ *     return (0);
+*/
+int	canmoveto(int x, int y, char **mtrxcpy)
 {
-	char	**cpy;
-	size_t	len;
-	size_t	i;
-
-	len = ft_mtrxlen((void **)matrixmap);
-	cpy = malloc((len + 1) * (sizeof(void *)));
-	if (!cpy && matrixmap == NULL)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		cpy[i] = malloc((ft_strlen(matrixmap[i]) + 1) * sizeof(char));
-		if (!cpy[i])
-			return (NULL);
-		ft_memcpy(cpy[i], matrixmap[i], ft_strlen(matrixmap[i]) + 1);
-		i++;
-	}
-	cpy[i] = NULL;
-	return (cpy);
-}
-
-int     canmoveto(int x, int y, char **mtrxcpy)
-{
-	// I added this to fix a mistake.
-	// But this should never give a mistake bcs the map
-	//    should hv been checked well before getting here
-	// if (x < 0 || y < 0)
-	// 	return (0);
 	if (mtrxcpy[y][x] == EMPTY || mtrxcpy[y][x] == COLLECT)
 	{
 		mtrxcpy[y][x] = PSTARTPOS;
@@ -69,19 +49,16 @@ int     canmoveto(int x, int y, char **mtrxcpy)
 	return (0);
 }
 
-void     mtrxpass(int x, int y, char **mtrxcpy)
+void	mtrxpass(int x, int y, char **mtrxcpy)
 {
-        if (canmoveto(x, y - 1, mtrxcpy))
-			(mtrxpass(x, y - 1, mtrxcpy));
-
-        if (canmoveto(x + 1, y, mtrxcpy))
-			(mtrxpass(x + 1, y, mtrxcpy));
-
-        if (canmoveto(x, y + 1, mtrxcpy))
-			(mtrxpass(x, y + 1, mtrxcpy));
-
-        if (canmoveto(x - 1, y, mtrxcpy))
-			(mtrxpass(x - 1, y, mtrxcpy));
+	if (canmoveto(x, y - 1, mtrxcpy))
+		(mtrxpass(x, y - 1, mtrxcpy));
+	if (canmoveto(x + 1, y, mtrxcpy))
+		(mtrxpass(x + 1, y, mtrxcpy));
+	if (canmoveto(x, y + 1, mtrxcpy))
+		(mtrxpass(x, y + 1, mtrxcpy));
+	if (canmoveto(x - 1, y, mtrxcpy))
+		(mtrxpass(x - 1, y, mtrxcpy));
 }
 
 int	chck_around(size_t x, size_t y, char **mtrxcpy)
@@ -125,10 +102,8 @@ int	vldpath_checkerp(t_info *worldata)
 	mtrxcpy = mtrxmap_cpy(worldata->matrixmap);
 	if (!mtrxcpy)
 		return (0);
-
 	mtrxcpy[worldata->ppos_y][worldata->ppos_x] = PSTARTPOS;
 	mtrxpass(worldata->ppos_x, worldata->ppos_y, mtrxcpy);
-
 	if (!mtrxdo(mtrxcpy, mtrxcpy, pthchk))
 	{
 		mtrx_free(mtrxcpy);

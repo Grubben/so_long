@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:08:36 by amc               #+#    #+#             */
-/*   Updated: 2022/11/16 15:40:44 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:06:16 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		mtrx_checkwallsp(char **mtrxmap);
 int		mtrx_checkmp(t_info *worldata);
 
 /*	PATH	*/
-int vldpath_checkerp(t_info *worldata);
+int		vldpath_checkerp(t_info *worldata);
 
 /*  MOVEMENT    */
 int		move_player(int directx, int directy, size_t quant, t_info *worldata);
@@ -99,6 +99,9 @@ int		draw_map(t_info *worldata);
 int		destroy(t_info *worldata);
 
 /*	UTILS	*/
-int	mtrxdo(char **mtrx, void *data, int (*func)(char, void *, size_t, size_t));
+int		mtrxdo(char **mtrx, void *data,
+			int (*func)(char, void *, size_t, size_t));
+
+char	**mtrxmap_cpy(char **matrixmap);
 
 #endif

@@ -97,12 +97,30 @@ int	chck_around(size_t x, size_t y, char **mtrxcpy)
 	return (0);
 }
 
-int		vldpath_checkerp(t_info *worldata)
+int	pthchk(char c, void *hiddendata, size_t i, size_t j)
+{
+	char	**data;
+
+	data = hiddendata;
+	if (c == COLLECT)
+	{
+		ft_printf("Collectible at %d_%d coord is not accessible\n", i, j);
+		return (0);
+	}
+	if (c == EXIT)
+	{
+		if (!chck_around(i, j, data))
+		{
+			ft_printf("Cannot access the Exit\n");
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int	vldpath_checkerp(t_info *worldata)
 {
 	char	**mtrxcpy;
-	char	type;
-	size_t	j;
-	size_t	i;
 
 	mtrxcpy = mtrxmap_cpy(worldata->matrixmap);
 	if (!mtrxcpy)
@@ -111,32 +129,10 @@ int		vldpath_checkerp(t_info *worldata)
 	mtrxcpy[worldata->ppos_y][worldata->ppos_x] = PSTARTPOS;
 	mtrxpass(worldata->ppos_x, worldata->ppos_y, mtrxcpy);
 
-	//TODO: verify there is a P next to E
-	j = 1;
-	while (mtrxcpy[j] != NULL)
+	if (!mtrxdo(mtrxcpy, mtrxcpy, pthchk))
 	{
-		i = 1;
-		while (mtrxcpy[j][i] != '\0')
-		{
-			type = mtrxcpy[j][i];
-			if (type == COLLECT)
-			{
-				ft_printf("Collectible at %d_%d coord is not accessible\n", i, j);
-				mtrx_free(mtrxcpy);
-				return (0);
-			}
-			if (type == EXIT)
-			{
-				if (!chck_around(i, j, mtrxcpy))
-				{
-					mtrx_free(mtrxcpy);
-					ft_printf("Cannot access the Exit\n");
-					return (0);
-				}
-			}
-			i++;
-		}
-		j++;
+		mtrx_free(mtrxcpy);
+		return (0);
 	}
 	mtrx_free(mtrxcpy);
 	return (1);

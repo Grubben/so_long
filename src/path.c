@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:01:13 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/16 17:03:38 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:52:21 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,12 @@ int	pthchk(char c, void *hiddendata, size_t i, size_t j)
 	data = hiddendata;
 	if (c == COLLECT)
 	{
-		ft_printf("Collectible at %d_%d coord is not accessible\n", i, j);
 		return (0);
 	}
 	if (c == EXIT)
 	{
 		if (!chck_around(i, j, data))
 		{
-			ft_printf("Cannot access the Exit\n");
 			return (0);
 		}
 	}

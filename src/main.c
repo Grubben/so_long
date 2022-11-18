@@ -6,7 +6,7 @@
 /*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 16:10:33 by amc               #+#    #+#             */
-/*   Updated: 2022/11/15 17:09:23 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:43:51 by amaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	main(int argc, char *argv[])
 		ft_printf("Nothing inside %s\n", argv[1]);
 		return (0);
 	}
-	matrixmap_printer(main.matrixmap);
 	if (!world_init(&main))
 	{
 		mtrx_free(main.matrixmap);

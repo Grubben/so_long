@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapfuncs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 10:38:12 by amaria-d          #+#    #+#             */
-/*   Updated: 2022/11/16 15:43:54 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:47:37 by amc              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	**aux(int fd, char **map, size_t count)
 	if (line)
 	{
 		line[ft_strlen(line) - 1] = '\0';
-		map = aux(fd, map, count +1);
+		map = aux(fd, map, count + 1);
 	}
 	else
 	{

@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaria-d <amaria-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amc <amc@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:23 by endarc            #+#    #+#             */
-/*   Updated: 2022/11/16 15:40:44 by amaria-d         ###   ########.fr       */
+/*   Updated: 2022/11/18 13:47:23 by amc              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // Checks wether map is rectangular and closed by walls
-int	mtrx_checkwallsp(char **mtrxmap)
+int	mtrx_checkwallsp(char **mtrxmp)
 {
 	size_t	lenx;
 	size_t	j;
 
-	if (!mtrxmap[0])
+	if (!mtrxmp[0])
 		return (0);
-	lenx = ft_strlen(mtrxmap[0]);
+	lenx = ft_strlen(mtrxmp[0]);
 	if (!lenx)
 		return (0);
 	j = 1;
-	while (mtrxmap[j] != NULL)
+	while (mtrxmp[j] != NULL)
 	{
-		if (ft_strlen(mtrxmap[j]) != lenx)
+		if (ft_strlen(mtrxmp[j]) != lenx)
 			return (0);
-		if (mtrxmap[j][0] != WALL || mtrxmap[j][lenx -1] != WALL)
+		if (mtrxmp[j][0] != WALL || mtrxmp[j][lenx - 1] != WALL)
 			return (0);
 		j++;
 	}
-	if (!ft_str_isallp(mtrxmap[0], WALL) || !ft_str_isallp(mtrxmap[j -1], WALL))
+	if (!ft_str_isallp(mtrxmp[0], WALL) || !ft_str_isallp(mtrxmp[j - 1], WALL))
 		return (0);
 	return (1);
 }
